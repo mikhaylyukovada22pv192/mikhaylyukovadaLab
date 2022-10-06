@@ -16,6 +16,7 @@ public class Main {
                 "Moscow, Lenin's street 12",
                 true,
                 true,
+                3,
                 true,
                 true,
                 true,

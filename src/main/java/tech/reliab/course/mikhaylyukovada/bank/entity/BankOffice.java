@@ -6,18 +6,20 @@ public class BankOffice extends Bank {
     private String address;
     private Boolean isWorking;
     private Boolean isPossibleToPlaceATM;
+    private Integer atmsNumber;
     private Boolean isGettingLoan;
     private Boolean isGettingMoney;
     private Boolean isGivingMoney;
     private Double rentPrice;
 
-    public BankOffice(Bank bank, Long id, String name, String address, Boolean isWorking, Boolean isPossibleToPlaceATM, Boolean isGettingLoan, Boolean isGettingMoney, Boolean isGivingMoney, Double rentPrice) {
+    public BankOffice(Bank bank, Long id, String name, String address, Boolean isWorking, Boolean isPossibleToPlaceATM, Integer atmsNumber, Boolean isGettingLoan, Boolean isGettingMoney, Boolean isGivingMoney, Double rentPrice) {
         super(bank);
         this.id = id;
         this.name = name;
         this.address = address;
         this.isWorking = isWorking;
         this.isPossibleToPlaceATM = isPossibleToPlaceATM;
+        this.atmsNumber = atmsNumber;
         this.isGettingLoan = isGettingLoan;
         this.isGettingMoney = isGettingMoney;
         this.isGivingMoney = isGivingMoney;
@@ -44,6 +46,10 @@ public class BankOffice extends Bank {
 
     public Boolean getPossibleToPlaceATM() {
         return isPossibleToPlaceATM;
+    }
+
+    public Integer getAtmsNumber() {
+        return atmsNumber;
     }
 
     public Boolean getGettingLoan() {
@@ -77,6 +83,10 @@ public class BankOffice extends Bank {
 
     public void setPossibleToPlaceATM(Boolean possibleToPlaceATM) {
         isPossibleToPlaceATM = possibleToPlaceATM;
+    }
+
+    public void setAtmsNumber(Integer atmsNumber) {
+        this.atmsNumber = atmsNumber;
     }
 
     public void setGettingLoan(Boolean gettingLoan) {
