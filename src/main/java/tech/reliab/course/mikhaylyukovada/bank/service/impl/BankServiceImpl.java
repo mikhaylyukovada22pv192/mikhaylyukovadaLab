@@ -3,6 +3,9 @@ package tech.reliab.course.mikhaylyukovada.bank.service.impl;
 import tech.reliab.course.mikhaylyukovada.bank.entity.Bank;
 import tech.reliab.course.mikhaylyukovada.bank.service.BankService;
 
+/**
+ * Реализация интерфейса для взаимодействия с банками
+ */
 public class BankServiceImpl implements BankService {
 
     private Bank bank = null;

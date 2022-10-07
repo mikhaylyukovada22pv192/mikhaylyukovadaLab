@@ -7,6 +7,9 @@ import tech.reliab.course.mikhaylyukovada.bank.service.CreditAccountService;
 
 import java.time.LocalDate;
 
+/**
+ * Реализация интерфейса для взаимодействия с кредитными счетами
+ */
 public class CreditAccountServiceImpl implements CreditAccountService {
 
     private CreditAccount creditAccount = null;

@@ -107,26 +107,46 @@ public class Bank {
         return interestRate;
     }
 
+    /**
+     * Задает название банка
+     *
+     * @param name название банка
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Добавляет офис
+     */
     public void addOffice() {
         this.officesNumber++;
     }
 
+    /**
+     * Добавляет АТМ
+     */
     public void addAtm() {
         this.atmsNumber++;
     }
 
+    /**
+     * Добавляет работника
+     */
     public void addEmployee() {
         this.employeesNumber++;
     }
 
+    /**
+     * Добавляет клиента
+     */
     public void addClient() {
         this.clientsNumber++;
     }
 
+    /**
+     * Отчищает данные банка
+     */
     public void clearBank() {
         this.id = null;
         this.name = null;

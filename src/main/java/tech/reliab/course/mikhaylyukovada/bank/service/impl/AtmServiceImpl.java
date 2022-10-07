@@ -5,6 +5,9 @@ import tech.reliab.course.mikhaylyukovada.bank.entity.BankAtm;
 import tech.reliab.course.mikhaylyukovada.bank.entity.Employee;
 import tech.reliab.course.mikhaylyukovada.bank.service.AtmService;
 
+/**
+ * Реализация интерфейса для взаимодействия с банкоматами
+ */
 public class AtmServiceImpl implements AtmService {
 
     private BankAtm bankAtm = null;

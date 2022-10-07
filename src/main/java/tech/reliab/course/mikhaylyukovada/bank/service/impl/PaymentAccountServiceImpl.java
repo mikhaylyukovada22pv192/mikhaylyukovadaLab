@@ -4,6 +4,9 @@ import tech.reliab.course.mikhaylyukovada.bank.entity.PaymentAccount;
 import tech.reliab.course.mikhaylyukovada.bank.entity.User;
 import tech.reliab.course.mikhaylyukovada.bank.service.PaymentAccountService;
 
+/**
+ * Реализация интерфейса для взаимодействия с платежными счетами
+ */
 public class PaymentAccountServiceImpl implements PaymentAccountService {
 
     private PaymentAccount paymentAccount = null;

@@ -4,6 +4,9 @@ import tech.reliab.course.mikhaylyukovada.bank.entity.Bank;
 import tech.reliab.course.mikhaylyukovada.bank.entity.BankOffice;
 import tech.reliab.course.mikhaylyukovada.bank.service.BankOfficeService;
 
+/**
+ * Реализация интерфейса для взаимодействия с офисами
+ */
 public class BankOfficeServiceImpl implements BankOfficeService {
 
     private BankOffice bankOffice = null;

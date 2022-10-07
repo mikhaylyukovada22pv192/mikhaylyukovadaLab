@@ -13,6 +13,19 @@ public class BankAtm extends Bank {
     private Boolean isAcceptingMoney;
     private Double maintenanceCost;
 
+    /**
+     * Конструктор для создания модели АТМ
+     *
+     * @param bank банк
+     * @param id id банкомата
+     * @param name название банкомата
+     * @param isWorking работает ли банкомат
+     * @param location местоположение
+     * @param employee обслуживающий сотрудник
+     * @param isGivingMoney выдает ли деньги
+     * @param isAcceptingMoney принимает ли деньги
+     * @param maintenanceCost стоимость обслуживания
+     */
     public BankAtm(Bank bank, Long id, String name, Boolean isWorking, String location, Employee employee, Boolean isGivingMoney, Boolean isAcceptingMoney, Double maintenanceCost) {
         super(bank);
         this.id = id;
@@ -25,69 +38,131 @@ public class BankAtm extends Bank {
         this.maintenanceCost = maintenanceCost;
     }
 
+    /**
+     * @return id банкомата
+     */
     @Override
     public Long getId() {
         return id;
     }
 
+    /**
+     * @return название банкомата
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * @return работает ли банкомат
+     */
     public Boolean getWorking() {
         return isWorking;
     }
 
+    /**
+     * @return местоположение банкомата
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * @return обслуживающего сотрудника
+     */
     public Employee getEmployee() {
         return employee;
     }
 
+    /**
+     * @return выдает ли банкомат деньги
+     */
     public Boolean getGivingMoney() {
         return isGivingMoney;
     }
 
+    /**
+     * @return принимает ли деньги
+     */
     public Boolean getAcceptingMoney() {
         return isAcceptingMoney;
     }
 
+    /**
+     * @return стоимость обслуживания банкомата
+     */
     public Double getMaintenanceCost() {
         return maintenanceCost;
     }
 
+    /**
+     * Задает название банкомата
+     *
+     * @param name название банкомата
+     */
     @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Задает работу банкомата
+     *
+     * @param isWorking работает ли банкомат
+     */
     public void setWorking(Boolean isWorking) {
         this.isWorking = isWorking;
     }
 
+    /**
+     * Задает местоположение банкомата
+     *
+     * @param location местоположение
+     */
     public void setLocation(String location) {
         this.location = location;
     }
 
+    /**
+     * Задает обслуживающего сотрудника
+     *
+     * @param employee сотрудник
+     */
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
 
+    /**
+     * Задает выдачу денег в банкомате
+     *
+     * @param givingMoney банкомат выдает деньги
+     */
     public void setGivingMoney(Boolean givingMoney) {
         isGivingMoney = givingMoney;
     }
 
+    /**
+     * Задает принятие денег банкоматом
+     *
+     * @param acceptingMoney банкомат принимает деньги
+     */
     public void setAcceptingMoney(Boolean acceptingMoney) {
         isAcceptingMoney = acceptingMoney;
     }
 
+    /**
+     * Задает стоимость обслуживания
+     *
+     * @param maintenanceCost стоимость обслуживания
+     */
     public void setMaintenanceCost(Double maintenanceCost) {
         this.maintenanceCost = maintenanceCost;
     }
 
+    /**
+     * Отчищает данные банкомата
+     */
     public void clearBankAtm() {
         super.clearBank();
         this.id = null;

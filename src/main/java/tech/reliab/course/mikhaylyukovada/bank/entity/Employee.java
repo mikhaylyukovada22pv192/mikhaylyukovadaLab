@@ -2,6 +2,9 @@ package tech.reliab.course.mikhaylyukovada.bank.entity;
 
 import java.time.LocalDate;
 
+/**
+ * Модель сотрудника
+ */
 public class Employee {
     private Long id;
     private String name;
@@ -13,6 +16,19 @@ public class Employee {
     private Boolean isPossibleGetLoan;
     private Double salary;
 
+    /**
+     * Конструктор для создания модели сотрудника
+     *
+     * @param id id сотрудника
+     * @param name имя сотрудника
+     * @param birthDate дата рождения
+     * @param jobTitle должность
+     * @param bankName название банка
+     * @param isWorkingInOffice работает ли в офисе
+     * @param bankOffice офис, в котором работает
+     * @param isPossibleGetLoan может ли выдать кредит
+     * @param salary зарплата
+     */
     public Employee(Long id, String name, LocalDate birthDate, String jobTitle, String bankName, Boolean isWorkingInOffice, BankOffice bankOffice, Boolean isPossibleGetLoan, Double salary) {
         this.id = id;
         this.name = name;
@@ -25,74 +41,144 @@ public class Employee {
         this.salary = salary;
     }
 
+    /**
+     * @return id сотрудника
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * @return имя сотрудника
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return дату рождения
+     */
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
+    /**
+     * @return должность
+     */
     public String getJobTitle() {
         return jobTitle;
     }
 
+    /**
+     * @return название банка
+     */
     public String getBankName() {
         return bankName;
     }
 
+    /**
+     * @return работает ли в офисе
+     */
     public Boolean getWorkingInOffice() {
         return isWorkingInOffice;
     }
 
+    /**
+     * @return название офиса
+     */
     public BankOffice getBankOffice() {
         return bankOffice;
     }
 
+    /**
+     * @return выдает ли кредиты
+     */
     public Boolean getPossibleGetLoan() {
         return isPossibleGetLoan;
     }
 
+    /**
+     * @return зарпалата сотрудника
+     */
     public Double getSalary() {
         return salary;
     }
 
+    /**
+     * Задает имя сотрудника
+     *
+     * @param name имя
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Задает дату рождения сотрудника
+     *
+     * @param birthDate дата рождения
+     */
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
+    /**
+     * Задает должность сотрудника
+     *
+     * @param jobTitle должность
+     */
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
 
+    /**
+     * Задает название банка
+     *
+     * @param bankName название
+     */
     public void setBankName(String bankName) {
         this.bankName = bankName;
     }
 
+    /**
+     * Задает в каком режиме работает сотрудник
+     *
+     * @param workingInOffice работает ли в офисе
+     */
     public void setWorkingInOffice(Boolean workingInOffice) {
         isWorkingInOffice = workingInOffice;
     }
 
+    /**
+     * Задает офис, в котором работает сотрудник
+     *
+     * @param bankOffice офис
+     */
     public void setBankOffice(BankOffice bankOffice) {
         this.bankOffice = bankOffice;
     }
 
+    /**
+     * Задает возможожность выдать кредит
+     *
+     * @param possibleGetLoan выдает ли сотрудник кредит
+     */
     public void setPossibleGetLoan(Boolean possibleGetLoan) {
         isPossibleGetLoan = possibleGetLoan;
     }
 
+    /**
+     * Задает зарплату сотрудника
+     *
+     * @param salary зарплата
+     */
     public void setSalary(Double salary) {
         this.salary = salary;
     }
 
+    /**
+     * Отчищает данные о сотруднике
+     */
     public void clearEmployee() {
         this.id = null;
         this.name = null;

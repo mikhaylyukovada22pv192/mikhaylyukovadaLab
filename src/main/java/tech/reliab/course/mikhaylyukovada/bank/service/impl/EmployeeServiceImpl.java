@@ -6,6 +6,9 @@ import tech.reliab.course.mikhaylyukovada.bank.service.EmployeeService;
 
 import java.time.LocalDate;
 
+/**
+ * Реализация интерфейса для взаимодействия с сотрудниками
+ */
 public class EmployeeServiceImpl implements EmployeeService {
 
     private Employee employee = null;

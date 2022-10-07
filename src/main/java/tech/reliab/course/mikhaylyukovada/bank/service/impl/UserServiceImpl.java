@@ -6,6 +6,9 @@ import tech.reliab.course.mikhaylyukovada.bank.service.UserService;
 
 import java.time.LocalDate;
 
+/**
+ * Реализация интерфейса для взаимодействия с пользователями
+ */
 public class UserServiceImpl implements UserService {
 
     private User user = null;
