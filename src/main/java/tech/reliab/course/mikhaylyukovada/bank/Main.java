@@ -1,16 +1,21 @@
 package tech.reliab.course.mikhaylyukovada.bank;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.*;
+import tech.reliab.course.mikhaylyukovada.bank.service.*;
+import tech.reliab.course.mikhaylyukovada.bank.service.impl.*;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        Bank bank = new Bank(
+        BankService bank = new BankServiceImpl();
+        bank.create(
                 1L,
                 "Sberbank"
         );
-        BankOffice bankOffice = new BankOffice(bank,
+
+        BankOfficeService bankOffice = new BankOfficeServiceImpl();
+        bankOffice.create(
+                bank.read(),
                 2L,
                 "Sberbank office",
                 "Moscow, Lenin's street 12",
@@ -22,57 +27,67 @@ public class Main {
                 true,
                 120.
         );
-        Employee employee = new Employee(
+
+        EmployeeService employee = new EmployeeServiceImpl();
+        employee.create(
                 3L,
                 "Alex Mironov",
                 LocalDate.of(1990, 8, 11),
                 "Director",
                 "Sberbank",
                 true,
-                bankOffice,
+                bankOffice.read(),
                 true,
                 10000.
         );
-        BankAtm bankAtm = new BankAtm(bank,
+
+        AtmService bankAtm = new AtmServiceImpl();
+        bankAtm.create(
+                bank.read(),
                 4L,
                 "Sberbank ATM",
                 true,
                 "Moscow, Lenin's street 12",
-                employee,
+                employee.read(),
                 true,
                 true,
                 250.
         );
-        User user = new User(
+
+        UserService user = new UserServiceImpl();
+        user.create(
                 5L,
                 "Max Afdeev",
                 LocalDate.of(1995, 1, 10),
                 "VK",
-                bank
+                bank.read()
         );
-        CreditAccount creditAccount = new CreditAccount(
+
+        CreditAccountService creditAccount = new CreditAccountServiceImpl();
+        creditAccount.create(
                 6L,
-                user,
+                user.read(),
                 "Sberbank",
                 LocalDate.of(2022, 2, 20),
                 LocalDate.of(2024, 2, 20),
                 24,
                 500000.,
                 2500.,
-                bank.getInterestRate(),
-                employee,
+                bank.read().getInterestRate(),
+                employee.read(),
                 "123rt4856"
         );
 
-        PaymentAccount paymentAccount = new PaymentAccount(
+        PaymentAccountService paymentAccount = new PaymentAccountServiceImpl();
+        paymentAccount.create(
                 7L,
-                user,
+                user.read(),
                 "Sberbank"
         );
 
-        user.setCreditAccount(creditAccount);
-        user.setPaymentAccount(paymentAccount);
+        user.read().setCreditAccount(creditAccount.read());
+        user.read().setPaymentAccount(paymentAccount.read());
 
-        System.out.println(bank + "\n" + bankOffice + "\n" + employee + "\n" + bankAtm + "\n" + user + "\n" + creditAccount + "\n" + paymentAccount);
+        System.out.println(bank.read() + "\n" + bankOffice.read() + "\n" + employee.read() + "\n" + bankAtm.read() + "\n" + user.read() + "\n" + creditAccount.read() + "\n" + paymentAccount.read());
     }
 }
