@@ -3,8 +3,9 @@ package tech.reliab.course.mikhaylyukovada.bank.entity;
 /**
  * Модель банкомата
  */
-public class BankAtm extends Bank {
+public class BankAtm {
     private Long id;
+    private BankOffice office;
     private String name;
     private Boolean isWorking;
     private String location;
@@ -16,7 +17,7 @@ public class BankAtm extends Bank {
     /**
      * Конструктор для создания модели АТМ
      *
-     * @param bank банк
+     * @param office банковский офис
      * @param id id банкомата
      * @param name название банкомата
      * @param isWorking работает ли банкомат
@@ -26,8 +27,8 @@ public class BankAtm extends Bank {
      * @param isAcceptingMoney принимает ли деньги
      * @param maintenanceCost стоимость обслуживания
      */
-    public BankAtm(Bank bank, Long id, String name, Boolean isWorking, String location, Employee employee, Boolean isGivingMoney, Boolean isAcceptingMoney, Double maintenanceCost) {
-        super(bank);
+    public BankAtm(Long id, BankOffice office, String name, Boolean isWorking, String location, Employee employee, Boolean isGivingMoney, Boolean isAcceptingMoney, Double maintenanceCost) {
+        this.office = office;
         this.id = id;
         this.name = name;
         this.isWorking = isWorking;
@@ -41,15 +42,20 @@ public class BankAtm extends Bank {
     /**
      * @return id банкомата
      */
-    @Override
     public Long getId() {
         return id;
     }
 
     /**
+     * @return банковский офис
+     */
+    public BankOffice getOffice() {
+        return office;
+    }
+
+    /**
      * @return название банкомата
      */
-    @Override
     public String getName() {
         return name;
     }
@@ -97,11 +103,17 @@ public class BankAtm extends Bank {
     }
 
     /**
+     * Задает банковский офис
+     */
+    public void setOffice(BankOffice office) {
+        this.office = office;
+    }
+
+    /**
      * Задает название банкомата
      *
      * @param name название банкомата
      */
-    @Override
     public void setName(String name) {
         this.name = name;
     }
@@ -164,7 +176,7 @@ public class BankAtm extends Bank {
      * Отчищает данные банкомата
      */
     public void clearBankAtm() {
-        super.clearBank();
+        this.office = null;
         this.id = null;
         this.name = null;
         this.isWorking = null;

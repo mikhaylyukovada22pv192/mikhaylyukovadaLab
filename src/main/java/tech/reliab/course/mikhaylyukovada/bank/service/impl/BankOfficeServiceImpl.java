@@ -12,8 +12,8 @@ public class BankOfficeServiceImpl implements BankOfficeService {
     private BankOffice bankOffice = null;
 
     @Override
-    public void create(Bank bank, Long id, String name, String address, Boolean isWorking, Boolean isPossibleToPlaceATM, Integer atmsNumber, Boolean isGettingLoan, Boolean isGettingMoney, Boolean isGivingMoney, Double rentPrice) {
-        this.bankOffice = new BankOffice(bank, id, name, address, isWorking, isPossibleToPlaceATM, atmsNumber, isGettingLoan, isGettingMoney, isGivingMoney, rentPrice);
+    public void create(Long id, String name, String address, Boolean isWorking, Boolean isPossibleToPlaceATM, Boolean isGettingLoan, Boolean isGettingMoney, Boolean isGivingMoney, Double rentPrice) {
+        this.bankOffice = new BankOffice(id, name, address, isWorking, isPossibleToPlaceATM, isGettingLoan, isGettingMoney, isGivingMoney, rentPrice);
     }
 
     @Override
@@ -29,5 +29,9 @@ public class BankOfficeServiceImpl implements BankOfficeService {
     @Override
     public void delete() {
         this.bankOffice = null;
+    }
+
+    public void addAtm() {
+        bankOffice.setAtmsNumber(bankOffice.getAtmsNumber() + 1);
     }
 }

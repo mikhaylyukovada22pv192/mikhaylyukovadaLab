@@ -18,15 +18,13 @@ public interface CreditAccountService {
      * @param user пользователь кредитного счета
      * @param bankName название банка
      * @param startDate дата начала
-     * @param endDate дата окончания
      * @param monthsNumber кол-во месяцев
      * @param creditAmount сумма кредита
-     * @param monthlyPayment ежемесячный платеж
      * @param interestRate процентная ставка
      * @param employee сотрудник, выдавший кредит
      * @param paymentAccount платежный счет
      */
-    void create(Long id, User user, String bankName, LocalDate startDate, LocalDate endDate, Integer monthsNumber, Double creditAmount, Double monthlyPayment, Double interestRate, Employee employee, String paymentAccount);
+    void create(Long id, User user, String bankName, LocalDate startDate, Integer monthsNumber, Double creditAmount, Double interestRate, Employee employee, String paymentAccount);
 
     /**
      * @return кредитный счет

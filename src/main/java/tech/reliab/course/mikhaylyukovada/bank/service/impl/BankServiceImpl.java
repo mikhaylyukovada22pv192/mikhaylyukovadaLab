@@ -29,4 +29,20 @@ public class BankServiceImpl implements BankService {
     public void delete() {
         this.bank = null;
     }
+
+    public void addOffice() {
+        this.bank.addOffice();
+    }
+
+    public void addAtm() {
+        this.bank.addAtm();
+    }
+
+    public void addEmployee() {
+        this.bank.addEmployee();
+    }
+
+    public void addClient() {
+        this.bank.addClient();
+    }
 }

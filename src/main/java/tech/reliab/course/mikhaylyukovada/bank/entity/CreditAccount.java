@@ -25,26 +25,24 @@ public class CreditAccount {
      * @param user пользователь кредитного счета
      * @param bankName название банка
      * @param startDate дата начала
-     * @param endDate дата окончания
      * @param monthsNumber кол-во месяцев
      * @param creditAmount сумма кредита
-     * @param monthlyPayment ежемесячный платеж
      * @param interestRate процентная ставка
      * @param employee сотрудник, выдавший кредит
      * @param paymentAccount платежный счет
      */
-    public CreditAccount(Long id, User user, String bankName, LocalDate startDate, LocalDate endDate, Integer monthsNumber, Double creditAmount, Double monthlyPayment, Double interestRate, Employee employee, String paymentAccount) {
+    public CreditAccount(Long id, User user, String bankName, LocalDate startDate, Integer monthsNumber, Double creditAmount, Double interestRate, Employee employee, String paymentAccount) {
         this.id = id;
         this.user = user;
         this.bankName = bankName;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.monthsNumber = monthsNumber;
         this.creditAmount = creditAmount;
-        this.monthlyPayment = monthlyPayment;
         this.interestRate = interestRate;
         this.employee = employee;
         this.paymentAccount = paymentAccount;
+        this.monthlyPayment = this.creditAmount / this.monthsNumber.doubleValue() * this.interestRate;
+        this.endDate = this.startDate.plusMonths(this.monthsNumber);
     }
 
     /**

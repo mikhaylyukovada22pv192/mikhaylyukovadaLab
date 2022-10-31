@@ -14,14 +14,13 @@ public class Main {
         );
 
         BankOfficeService bankOffice = new BankOfficeServiceImpl();
+        bank.addOffice();
         bankOffice.create(
-                bank.read(),
                 2L,
                 "Sberbank office",
                 "Moscow, Lenin's street 12",
                 true,
                 true,
-                3,
                 true,
                 true,
                 true,
@@ -29,6 +28,7 @@ public class Main {
         );
 
         EmployeeService employee = new EmployeeServiceImpl();
+        bank.addEmployee();
         employee.create(
                 3L,
                 "Alex Mironov",
@@ -42,8 +42,10 @@ public class Main {
         );
 
         AtmService bankAtm = new AtmServiceImpl();
+        bank.addAtm();
+        bankOffice.addAtm();
         bankAtm.create(
-                bank.read(),
+                bankOffice.read(),
                 4L,
                 "Sberbank ATM",
                 true,
@@ -55,6 +57,7 @@ public class Main {
         );
 
         UserService user = new UserServiceImpl();
+        bank.addClient();
         user.create(
                 5L,
                 "Max Afdeev",
@@ -69,10 +72,8 @@ public class Main {
                 user.read(),
                 "Sberbank",
                 LocalDate.of(2022, 2, 20),
-                LocalDate.of(2024, 2, 20),
                 24,
                 500000.,
-                2500.,
                 bank.read().getInterestRate(),
                 employee.read(),
                 "123rt4856"

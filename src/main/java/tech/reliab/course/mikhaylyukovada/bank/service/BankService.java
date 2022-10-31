@@ -32,4 +32,24 @@ public interface BankService {
      */
     void delete();
 
+    /**
+     * Добавляет офис
+     */
+    void addOffice();
+
+    /**
+     * Добавляет АТМ
+     */
+    void addAtm();
+
+    /**
+     * Добавляет работника
+     */
+    void addEmployee();
+
+    /**
+     * Добавляет клиента
+     */
+    void addClient();
+
 }

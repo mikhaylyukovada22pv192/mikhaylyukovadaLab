@@ -3,13 +3,13 @@ package tech.reliab.course.mikhaylyukovada.bank.entity;
 /**
  * Модель банковского офиса
  */
-public class BankOffice extends Bank {
+public class BankOffice {
     private Long id;
     private String name;
     private String address;
     private Boolean isWorking;
     private Boolean isPossibleToPlaceATM;
-    private Integer atmsNumber;
+    private Integer atmsNumber = 0;
     private Boolean isGettingLoan;
     private Boolean isGettingMoney;
     private Boolean isGivingMoney;
@@ -18,26 +18,22 @@ public class BankOffice extends Bank {
     /**
      * Конструктор для создания модели банковского офиса
      *
-     * @param bank банк
      * @param id id офиса
      * @param name название офиса
      * @param address адрес
      * @param isWorking работает ли офис
      * @param isPossibleToPlaceATM возможно ли разместить АТМ
-     * @param atmsNumber количество АТМ
      * @param isGettingLoan возможно ли оформить кредит
      * @param isGettingMoney возможно ли снять деньги
      * @param isGivingMoney возможно ли положить деньги
      * @param rentPrice стоимость аренды
      */
-    public BankOffice(Bank bank, Long id, String name, String address, Boolean isWorking, Boolean isPossibleToPlaceATM, Integer atmsNumber, Boolean isGettingLoan, Boolean isGettingMoney, Boolean isGivingMoney, Double rentPrice) {
-        super(bank);
+    public BankOffice(Long id, String name, String address, Boolean isWorking, Boolean isPossibleToPlaceATM, Boolean isGettingLoan, Boolean isGettingMoney, Boolean isGivingMoney, Double rentPrice) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.isWorking = isWorking;
         this.isPossibleToPlaceATM = isPossibleToPlaceATM;
-        this.atmsNumber = atmsNumber;
         this.isGettingLoan = isGettingLoan;
         this.isGettingMoney = isGettingMoney;
         this.isGivingMoney = isGivingMoney;
@@ -47,7 +43,6 @@ public class BankOffice extends Bank {
     /**
      * @return возвращает id офиса
      */
-    @Override
     public Long getId() {
         return id;
     }
@@ -55,7 +50,6 @@ public class BankOffice extends Bank {
     /**
      * @return возвращает название офиса
      */
-    @Override
     public String getName() {
         return name;
     }
@@ -121,7 +115,6 @@ public class BankOffice extends Bank {
      *
      * @param name название офиса
      */
-    @Override
     public void setName(String name) {
         this.name = name;
     }
@@ -202,7 +195,6 @@ public class BankOffice extends Bank {
      * Отчищает данные банковского офиса
      */
     public void clearBankOffice() {
-        super.clearBank();
         this.id = null;
         this.name = null;
         this.address = null;
