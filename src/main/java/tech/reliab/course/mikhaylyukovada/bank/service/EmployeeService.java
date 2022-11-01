@@ -8,7 +8,7 @@ import java.time.LocalDate;
 /**
  * Интерфейс для взаимодействия с сотрудниками
  */
-public interface EmployeeService {
+public interface EmployeeService extends Service<Employee> {
 
     /**
      * Создает модель сотрудника
@@ -25,20 +25,4 @@ public interface EmployeeService {
      */
     void create(Long id, String name, LocalDate birthDate, String jobTitle, String bankName, Boolean isWorkingInOffice, BankOffice bankOffice, Boolean isPossibleGetLoan, Double salary);
 
-    /**
-     * @return модель сотрудника
-     */
-    Employee read();
-
-    /**
-     * Обновляет модель сотрудника
-     *
-     * @param employee сотрудник
-     */
-    void update(Employee employee);
-
-    /**
-     * Удаляет сотрудника
-     */
-    void delete();
 }

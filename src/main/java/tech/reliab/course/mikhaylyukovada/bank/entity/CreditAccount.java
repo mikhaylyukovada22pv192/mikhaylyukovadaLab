@@ -1,12 +1,12 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
+import tech.reliab.course.mikhaylyukovada.bank.entity.models.BankObject;
 import java.time.LocalDate;
 
 /**
  * Модель кредитного счета
  */
-public class CreditAccount {
-    private Long id;
+public class CreditAccount extends BankObject {
     private User user;
     private String bankName;
     private LocalDate startDate;
@@ -32,7 +32,7 @@ public class CreditAccount {
      * @param paymentAccount платежный счет
      */
     public CreditAccount(Long id, User user, String bankName, LocalDate startDate, Integer monthsNumber, Double creditAmount, Double interestRate, Employee employee, String paymentAccount) {
-        this.id = id;
+        super(id);
         this.user = user;
         this.bankName = bankName;
         this.startDate = startDate;
@@ -43,13 +43,6 @@ public class CreditAccount {
         this.paymentAccount = paymentAccount;
         this.monthlyPayment = this.creditAmount / this.monthsNumber.doubleValue() * this.interestRate;
         this.endDate = this.startDate.plusMonths(this.monthsNumber);
-    }
-
-    /**
-     * @return id счета
-     */
-    public Long getId() {
-        return id;
     }
 
     /**

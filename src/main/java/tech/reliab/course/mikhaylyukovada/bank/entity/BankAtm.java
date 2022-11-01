@@ -1,10 +1,11 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
+import tech.reliab.course.mikhaylyukovada.bank.entity.models.BankObject;
+
 /**
  * Модель банкомата
  */
-public class BankAtm {
-    private Long id;
+public class BankAtm extends BankObject {
     private BankOffice office;
     private String name;
     private Boolean isWorking;
@@ -17,8 +18,8 @@ public class BankAtm {
     /**
      * Конструктор для создания модели АТМ
      *
-     * @param office банковский офис
      * @param id id банкомата
+     * @param office банковский офис
      * @param name название банкомата
      * @param isWorking работает ли банкомат
      * @param location местоположение
@@ -28,8 +29,8 @@ public class BankAtm {
      * @param maintenanceCost стоимость обслуживания
      */
     public BankAtm(Long id, BankOffice office, String name, Boolean isWorking, String location, Employee employee, Boolean isGivingMoney, Boolean isAcceptingMoney, Double maintenanceCost) {
+        super(id);
         this.office = office;
-        this.id = id;
         this.name = name;
         this.isWorking = isWorking;
         this.location = location;
@@ -37,13 +38,6 @@ public class BankAtm {
         this.isGivingMoney = isGivingMoney;
         this.isAcceptingMoney = isAcceptingMoney;
         this.maintenanceCost = maintenanceCost;
-    }
-
-    /**
-     * @return id банкомата
-     */
-    public Long getId() {
-        return id;
     }
 
     /**
@@ -176,8 +170,8 @@ public class BankAtm {
      * Отчищает данные банкомата
      */
     public void clearBankAtm() {
-        this.office = null;
         this.id = null;
+        this.office = null;
         this.name = null;
         this.isWorking = null;
         this.location = null;

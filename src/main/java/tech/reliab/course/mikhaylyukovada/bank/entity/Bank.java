@@ -1,12 +1,13 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
+import tech.reliab.course.mikhaylyukovada.bank.entity.models.BankObject;
 import java.util.Random;
 
 /**
  * Модель банка
  */
-public class Bank {
-    private Long id;
+public class Bank extends BankObject {
+
     private String name;
     private Integer officesNumber = 0;
     private Integer atmsNumber = 0;
@@ -23,7 +24,7 @@ public class Bank {
      * @param name название
      */
     public Bank(Long id, String name) {
-        this.id = id;
+        super(id);
         this.name = name;
 
         Random rand = new Random();
@@ -33,7 +34,7 @@ public class Bank {
     }
 
     protected Bank(Bank bank) {
-        this.id = bank.getId();
+        super(bank.getId());
         this.name = bank.getName();
         this.officesNumber = bank.getOfficesNumber();
         this.atmsNumber = bank.getAtmsNumber();
@@ -42,13 +43,6 @@ public class Bank {
         this.bankRating = bank.getBankRating();
         this.totalMoney = bank.getTotalMoney();
         this.interestRate = bank.getInterestRate();
-    }
-
-    /**
-     * @return id банка
-     */
-    public Long getId() {
-        return id;
     }
 
     /**

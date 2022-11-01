@@ -3,13 +3,12 @@ package tech.reliab.course.mikhaylyukovada.bank.service;
 import tech.reliab.course.mikhaylyukovada.bank.entity.CreditAccount;
 import tech.reliab.course.mikhaylyukovada.bank.entity.Employee;
 import tech.reliab.course.mikhaylyukovada.bank.entity.User;
-
 import java.time.LocalDate;
 
 /**
  * Интерфейс для взаимодействия с кредитными счетами
  */
-public interface CreditAccountService {
+public interface CreditAccountService extends Service<CreditAccount> {
 
     /**
      * Создает модель кредитного счета
@@ -26,20 +25,4 @@ public interface CreditAccountService {
      */
     void create(Long id, User user, String bankName, LocalDate startDate, Integer monthsNumber, Double creditAmount, Double interestRate, Employee employee, String paymentAccount);
 
-    /**
-     * @return кредитный счет
-     */
-    CreditAccount read();
-
-    /**
-     * Обновляет кредитный счет
-     *
-     * @param creditAccount кредитный счет
-     */
-    void update(CreditAccount creditAccount);
-
-    /**
-     * Удаляет кредитный счет
-     */
-    void delete();
 }

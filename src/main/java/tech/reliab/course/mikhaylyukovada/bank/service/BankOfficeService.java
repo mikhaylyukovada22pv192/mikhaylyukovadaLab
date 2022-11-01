@@ -5,7 +5,7 @@ import tech.reliab.course.mikhaylyukovada.bank.entity.BankOffice;
 /**
  * Интерфейс для взаимодействия с офисами
  */
-public interface BankOfficeService {
+public interface BankOfficeService extends Service<BankOffice>{
 
     /**
      * Созадет модель офиса
@@ -21,23 +21,6 @@ public interface BankOfficeService {
      * @param rentPrice стоимость аренды
      */
     void create(Long id, String name, String address, Boolean isWorking, Boolean isPossibleToPlaceATM, Boolean isGettingLoan, Boolean isGettingMoney, Boolean isGivingMoney, Double rentPrice);
-
-    /**
-     * @return модель офиса
-     */
-    BankOffice read();
-
-    /**
-     * Обновляет модель офиса
-     *
-     * @param bankOffice офис
-     */
-    void update(BankOffice bankOffice);
-
-    /**
-     * Удаляет модель офиса
-     */
-    void delete();
 
     /**
      * Добавляет АТМ

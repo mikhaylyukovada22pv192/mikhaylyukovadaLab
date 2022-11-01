@@ -1,14 +1,12 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
+import tech.reliab.course.mikhaylyukovada.bank.entity.models.Person;
 import java.time.LocalDate;
 
 /**
  * Модель сотрудника
  */
-public class Employee {
-    private Long id;
-    private String name;
-    private LocalDate birthDate;
+public class Employee extends Person {
     private String jobTitle;
     private String bankName;
     private Boolean isWorkingInOffice;
@@ -30,36 +28,13 @@ public class Employee {
      * @param salary зарплата
      */
     public Employee(Long id, String name, LocalDate birthDate, String jobTitle, String bankName, Boolean isWorkingInOffice, BankOffice bankOffice, Boolean isPossibleGetLoan, Double salary) {
-        this.id = id;
-        this.name = name;
-        this.birthDate = birthDate;
+        super(id, name, birthDate);
         this.jobTitle = jobTitle;
         this.bankName = bankName;
         this.isWorkingInOffice = isWorkingInOffice;
         this.bankOffice = bankOffice;
         this.isPossibleGetLoan = isPossibleGetLoan;
         this.salary = salary;
-    }
-
-    /**
-     * @return id сотрудника
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @return имя сотрудника
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @return дату рождения
-     */
-    public LocalDate getBirthDate() {
-        return birthDate;
     }
 
     /**
@@ -102,24 +77,6 @@ public class Employee {
      */
     public Double getSalary() {
         return salary;
-    }
-
-    /**
-     * Задает имя сотрудника
-     *
-     * @param name имя
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Задает дату рождения сотрудника
-     *
-     * @param birthDate дата рождения
-     */
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
     }
 
     /**

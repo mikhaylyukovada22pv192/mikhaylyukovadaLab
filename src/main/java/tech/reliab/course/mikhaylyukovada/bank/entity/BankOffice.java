@@ -1,10 +1,11 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
+import tech.reliab.course.mikhaylyukovada.bank.entity.models.BankObject;
+
 /**
  * Модель банковского офиса
  */
-public class BankOffice {
-    private Long id;
+public class BankOffice extends BankObject {
     private String name;
     private String address;
     private Boolean isWorking;
@@ -29,7 +30,7 @@ public class BankOffice {
      * @param rentPrice стоимость аренды
      */
     public BankOffice(Long id, String name, String address, Boolean isWorking, Boolean isPossibleToPlaceATM, Boolean isGettingLoan, Boolean isGettingMoney, Boolean isGivingMoney, Double rentPrice) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.address = address;
         this.isWorking = isWorking;
@@ -38,13 +39,6 @@ public class BankOffice {
         this.isGettingMoney = isGettingMoney;
         this.isGivingMoney = isGivingMoney;
         this.rentPrice = rentPrice;
-    }
-
-    /**
-     * @return возвращает id офиса
-     */
-    public Long getId() {
-        return id;
     }
 
     /**

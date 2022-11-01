@@ -1,15 +1,13 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
+import tech.reliab.course.mikhaylyukovada.bank.entity.models.Person;
 import java.time.LocalDate;
 import java.util.Random;
 
 /**
  * Модель пользователя
  */
-public class User {
-    private Long id;
-    private String name;
-    private LocalDate birthDate;
+public class User extends Person {
     private String workPlace;
     private Double monthlyIncome;
     private Bank bank;
@@ -27,36 +25,13 @@ public class User {
      * @param bank банк, которым пользуется
      */
     public User(Long id, String name, LocalDate birthDate, String workPlace, Bank bank) {
-        this.id = id;
-        this.name = name;
-        this.birthDate = birthDate;
+        super(id, name, birthDate);
         this.workPlace = workPlace;
         this.bank = bank;
 
         Random rand = new Random();
         this.monthlyIncome = rand.nextDouble(10000) + 100;
         this.creditRating = this.monthlyIncome % 100;
-    }
-
-    /**
-     * @return id пользователя
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @return имя пользователя
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @return дату рождения
-     */
-    public LocalDate getBirthDate() {
-        return birthDate;
     }
 
     /**
@@ -99,24 +74,6 @@ public class User {
      */
     public Double getCreditRating() {
         return creditRating;
-    }
-
-    /**
-     * Задает имя пользователя
-     *
-     * @param name имя
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Задает дату рождения
-     *
-     * @param birthDate дата рождения
-     */
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
     }
 
     /**

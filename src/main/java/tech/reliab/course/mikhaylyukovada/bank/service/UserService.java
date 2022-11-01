@@ -8,7 +8,7 @@ import java.time.LocalDate;
 /**
  * Интерфейс для взаимодействия с пользователями
  */
-public interface UserService {
+public interface UserService extends Service<User> {
 
     /**
      * Создает модель пользователя
@@ -21,20 +21,4 @@ public interface UserService {
      */
     void create(Long id, String name, LocalDate birthDate, String workPlace, Bank bank);
 
-    /**
-     * @return пользователя
-     */
-    User read();
-
-    /**
-     * Обвновляет пользователя
-     *
-     * @param user пользователь
-     */
-    void update(User user);
-
-    /**
-     * Удаляет пользователя
-     */
-    void delete();
 }

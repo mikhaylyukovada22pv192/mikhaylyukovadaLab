@@ -7,7 +7,7 @@ import tech.reliab.course.mikhaylyukovada.bank.entity.Employee;
 /**
  * Интерфейс для взаимодействия с банкоматами
  */
-public interface AtmService {
+public interface AtmService extends Service<BankAtm> {
 
     /**
      * Создает модель банкомата
@@ -23,22 +23,5 @@ public interface AtmService {
      * @param maintenanceCost стоимость обслуживания
      */
     void create(BankOffice office, Long id, String name, Boolean isWorking, String location, Employee employee, Boolean isGivingMoney, Boolean isAcceptingMoney, Double maintenanceCost);
-
-    /**
-     * @return модель банкомата
-     */
-    BankAtm read();
-
-    /**
-     * Обновляет модель банкомата
-     *
-     * @param atm банкомат
-     */
-    void update(BankAtm atm);
-
-    /**
-     * Удаляет модель банкомата
-     */
-    void delete();
 
 }

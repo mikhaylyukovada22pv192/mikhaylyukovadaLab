@@ -9,27 +9,9 @@ import java.time.LocalDate;
 /**
  * Реализация интерфейса для взаимодействия с сотрудниками
  */
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl extends ServiceImpl<Employee> implements EmployeeService {
 
-    private Employee employee = null;
-
-    @Override
     public void create(Long id, String name, LocalDate birthDate, String jobTitle, String bankName, Boolean isWorkingInOffice, BankOffice bankOffice, Boolean isPossibleGetLoan, Double salary) {
-        this.employee = new Employee(id, name, birthDate, jobTitle, bankName, isWorkingInOffice, bankOffice, isPossibleGetLoan, salary);
-    }
-
-    @Override
-    public Employee read() {
-        return employee;
-    }
-
-    @Override
-    public void update(Employee employee) {
-        this.employee = employee;
-    }
-
-    @Override
-    public void delete() {
-        this.employee = null;
+        this.model = new Employee(id, name, birthDate, jobTitle, bankName, isWorkingInOffice, bankOffice, isPossibleGetLoan, salary);
     }
 }

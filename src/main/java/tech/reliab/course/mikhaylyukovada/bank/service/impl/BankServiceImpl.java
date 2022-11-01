@@ -6,43 +6,25 @@ import tech.reliab.course.mikhaylyukovada.bank.service.BankService;
 /**
  * Реализация интерфейса для взаимодействия с банками
  */
-public class BankServiceImpl implements BankService {
+public class BankServiceImpl extends ServiceImpl<Bank> implements BankService {
 
-    private Bank bank = null;
-
-    @Override
     public void create(Long id, String name) {
-        this.bank = new Bank(id, name);
-    }
-
-    @Override
-    public Bank read() {
-        return bank;
-    }
-
-    @Override
-    public void update(Bank bank) {
-        this.bank = bank;
-    }
-
-    @Override
-    public void delete() {
-        this.bank = null;
+        this.model = new Bank(id, name);
     }
 
     public void addOffice() {
-        this.bank.addOffice();
+        this.model.addOffice();
     }
 
     public void addAtm() {
-        this.bank.addAtm();
+        this.model.addAtm();
     }
 
     public void addEmployee() {
-        this.bank.addEmployee();
+        this.model.addEmployee();
     }
 
     public void addClient() {
-        this.bank.addClient();
+        this.model.addClient();
     }
 }

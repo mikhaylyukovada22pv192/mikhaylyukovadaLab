@@ -1,10 +1,11 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
+import tech.reliab.course.mikhaylyukovada.bank.entity.models.BankObject;
+
 /**
  * Модель платежного счета
  */
-public class PaymentAccount {
-    private Long id;
+public class PaymentAccount extends BankObject {
     private User user;
     private String bankName;
     private Double moneyAmount = 0.;
@@ -17,16 +18,10 @@ public class PaymentAccount {
      * @param bankName название банка
      */
     public PaymentAccount(Long id, User user, String bankName) {
+        super(id);
         this.id = id;
         this.user = user;
         this.bankName = bankName;
-    }
-
-    /**
-     * @return id счета
-     */
-    public Long getId() {
-        return id;
     }
 
     /**

@@ -9,27 +9,10 @@ import java.time.LocalDate;
 /**
  * Реализация интерфейса для взаимодействия с пользователями
  */
-public class UserServiceImpl implements UserService {
-
-    private User user = null;
+public class UserServiceImpl extends ServiceImpl<User> implements UserService {
 
     @Override
     public void create(Long id, String name, LocalDate birthDate, String workPlace, Bank bank) {
-        this.user = new User(id, name, birthDate, workPlace, bank);
-    }
-
-    @Override
-    public User read() {
-        return user;
-    }
-
-    @Override
-    public void update(User user) {
-        this.user = user;
-    }
-
-    @Override
-    public void delete() {
-        this.user = null;
+        this.model = new User(id, name, birthDate, workPlace, bank);
     }
 }
