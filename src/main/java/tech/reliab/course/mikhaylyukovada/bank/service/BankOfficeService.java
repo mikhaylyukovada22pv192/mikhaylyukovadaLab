@@ -27,4 +27,9 @@ public interface BankOfficeService extends Service<BankOffice>{
      */
     void addAtm();
 
+    /**
+     * Добавляет сотрудника
+     */
+    void addEmployee();
+
 }

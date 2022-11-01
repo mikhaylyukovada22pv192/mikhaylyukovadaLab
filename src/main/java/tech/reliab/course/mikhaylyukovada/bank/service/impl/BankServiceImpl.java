@@ -8,22 +8,27 @@ import tech.reliab.course.mikhaylyukovada.bank.service.BankService;
  */
 public class BankServiceImpl extends ServiceImpl<Bank> implements BankService {
 
+    @Override
     public void create(Long id, String name) {
         this.model = new Bank(id, name);
     }
 
+    @Override
     public void addOffice() {
         this.model.addOffice();
     }
 
+    @Override
     public void addAtm() {
         this.model.addAtm();
     }
 
+    @Override
     public void addEmployee() {
         this.model.addEmployee();
     }
 
+    @Override
     public void addClient() {
         this.model.addClient();
     }

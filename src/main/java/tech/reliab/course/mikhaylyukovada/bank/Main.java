@@ -13,8 +13,7 @@ public class Main {
                 "Sberbank"
         );
 
-        BankOfficeService bankOffice = new BankOfficeServiceImpl();
-        bank.addOffice();
+        BankOfficeService bankOffice = new BankOfficeServiceImpl(bank);
         bankOffice.create(
                 2L,
                 "Sberbank office",
@@ -27,8 +26,7 @@ public class Main {
                 120.
         );
 
-        EmployeeService employee = new EmployeeServiceImpl();
-        bank.addEmployee();
+        EmployeeService employee = new EmployeeServiceImpl(bankOffice);
         employee.create(
                 3L,
                 "Alex Mironov",
@@ -41,9 +39,7 @@ public class Main {
                 10000.
         );
 
-        AtmService bankAtm = new AtmServiceImpl();
-        bank.addAtm();
-        bankOffice.addAtm();
+        AtmService bankAtm = new AtmServiceImpl(bankOffice);
         bankAtm.create(
                 bankOffice.read(),
                 4L,
@@ -56,8 +52,7 @@ public class Main {
                 250.
         );
 
-        UserService user = new UserServiceImpl();
-        bank.addClient();
+        UserService user = new UserServiceImpl(bank);
         user.create(
                 5L,
                 "Max Afdeev",
