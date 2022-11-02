@@ -225,9 +225,11 @@ public class BankOffice extends BankObject {
                 ", address='" + address + '\'' +
                 ", isWorking=" + isWorking +
                 ", isPossibleToPlaceATM=" + isPossibleToPlaceATM +
+                ", atmsNumber=" + atmsNumber +
                 ", isGettingLoan=" + isGettingLoan +
                 ", isGettingMoney=" + isGettingMoney +
                 ", isGivingMoney=" + isGivingMoney +
+                ", totalMoney=" + totalMoney +
                 ", rentPrice=" + rentPrice +
                 '}';
     }
