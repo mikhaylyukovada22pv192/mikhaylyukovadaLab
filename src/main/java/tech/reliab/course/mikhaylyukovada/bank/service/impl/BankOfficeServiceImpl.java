@@ -18,17 +18,19 @@ public class BankOfficeServiceImpl extends ServiceImpl<BankOffice> implements Ba
     @Override
     public void create(Long id, String name, String address, Boolean isWorking, Boolean isPossibleToPlaceATM, Boolean isGettingLoan, Boolean isGettingMoney, Boolean isGivingMoney, Double rentPrice) {
         this.model = new BankOffice(id, name, address, isWorking, isPossibleToPlaceATM, isGettingLoan, isGettingMoney, isGivingMoney, rentPrice);
-        this.bankService.addOffice();
+
+        model.setTotalMoney(this.bankService.read().getTotalMoney());
+        bankService.addOffice();
     }
 
     @Override
     public void addAtm() {
-        model.setAtmsNumber(model.getAtmsNumber() + 1);
-        this.bankService.addOffice();
+        model.setAtmsNumber(this.model.getAtmsNumber() + 1);
+        bankService.addAtm();
     }
 
     @Override
     public void addEmployee() {
-        this.bankService.addEmployee();
+        bankService.addEmployee();
     }
 }

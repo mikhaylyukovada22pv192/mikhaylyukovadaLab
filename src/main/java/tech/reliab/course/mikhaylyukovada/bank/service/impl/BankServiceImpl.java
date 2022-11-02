@@ -15,21 +15,21 @@ public class BankServiceImpl extends ServiceImpl<Bank> implements BankService {
 
     @Override
     public void addOffice() {
-        this.model.addOffice();
+        model.addOffice();
     }
 
     @Override
     public void addAtm() {
-        this.model.addAtm();
+        model.addAtm();
     }
 
     @Override
     public void addEmployee() {
-        this.model.addEmployee();
+        model.addEmployee();
     }
 
     @Override
     public void addClient() {
-        this.model.addClient();
+        model.addClient();
     }
 }

@@ -22,6 +22,6 @@ public class EmployeeServiceImpl extends ServiceImpl<Employee> implements Employ
     @Override
     public void create(Long id, String name, LocalDate birthDate, String jobTitle, String bankName, Boolean isWorkingInOffice, BankOffice bankOffice, Boolean isPossibleGetLoan, Double salary) {
         this.model = new Employee(id, name, birthDate, jobTitle, bankName, isWorkingInOffice, bankOffice, isPossibleGetLoan, salary);
-        this.bankOfficeService.addEmployee();
+        bankOfficeService.addEmployee();
     }
 }

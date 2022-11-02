@@ -14,5 +14,8 @@ public class CreditAccountServiceImpl extends ServiceImpl<CreditAccount> impleme
     @Override
     public void create(Long id, User user, String bankName, LocalDate startDate, Integer monthsNumber, Double creditAmount, Double interestRate, Employee employee, String paymentAccount) {
         this.model = new CreditAccount(id, user, bankName, startDate, monthsNumber, creditAmount, interestRate, employee, paymentAccount);
+
+        model.setCreditAmount(model.getCreditAmount() / model.getMonthsNumber().doubleValue() * model.getInterestRate());
+        model.setEndDate(model.getStartDate().plusMonths(model.getMonthsNumber()));
     }
 }

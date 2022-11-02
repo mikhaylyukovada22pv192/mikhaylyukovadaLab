@@ -41,8 +41,6 @@ public class CreditAccount extends BankObject {
         this.interestRate = interestRate;
         this.employee = employee;
         this.paymentAccount = paymentAccount;
-        this.monthlyPayment = this.creditAmount / this.monthsNumber.doubleValue() * this.interestRate;
-        this.endDate = this.startDate.plusMonths(this.monthsNumber);
     }
 
     /**

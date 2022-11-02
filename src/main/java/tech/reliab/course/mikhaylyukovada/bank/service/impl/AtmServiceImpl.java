@@ -20,6 +20,6 @@ public class AtmServiceImpl extends ServiceImpl<BankAtm> implements AtmService {
     @Override
     public void create(BankOffice office, Long id, String name, Boolean isWorking, String location, Employee employee, Boolean isGivingMoney, Boolean isAcceptingMoney, Double maintenanceCost) {
         this.model = new BankAtm(id, office, name, isWorking, location, employee, isGivingMoney, isAcceptingMoney, maintenanceCost);
-        this.bankOfficeService.addAtm();
+        bankOfficeService.addAtm();
     }
 }

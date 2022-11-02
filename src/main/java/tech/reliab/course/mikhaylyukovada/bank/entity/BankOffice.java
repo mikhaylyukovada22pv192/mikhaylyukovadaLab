@@ -14,6 +14,7 @@ public class BankOffice extends BankObject {
     private Boolean isGettingLoan;
     private Boolean isGettingMoney;
     private Boolean isGivingMoney;
+    private Double totalMoney;
     private Double rentPrice;
 
     /**
@@ -98,6 +99,13 @@ public class BankOffice extends BankObject {
     }
 
     /**
+     * @return кол-во денег в офисе
+     */
+    public Double getTotalMoney() {
+        return totalMoney;
+    }
+
+    /**
      * @return стоимость аренды
      */
     public Double getRentPrice() {
@@ -174,6 +182,15 @@ public class BankOffice extends BankObject {
      */
     public void setGivingMoney(Boolean givingMoney) {
         isGivingMoney = givingMoney;
+    }
+
+    /**
+     * Задает кол-во денег в офисе
+     *
+     * @param totalMoney кол-во денег
+     */
+    public void setTotalMoney(Double totalMoney) {
+        this.totalMoney = totalMoney;
     }
 
     /**

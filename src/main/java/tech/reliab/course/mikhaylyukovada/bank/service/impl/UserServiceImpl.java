@@ -21,6 +21,6 @@ public class UserServiceImpl extends ServiceImpl<User> implements UserService {
     @Override
     public void create(Long id, String name, LocalDate birthDate, String workPlace, Bank bank) {
         this.model = new User(id, name, birthDate, workPlace, bank);
-        this.bankService.addClient();
+        bankService.addClient();
     }
 }
