@@ -1,89 +1,59 @@
 package tech.reliab.course.mikhaylyukovada.bank;
 
+import tech.reliab.course.mikhaylyukovada.bank.entity.*;
 import tech.reliab.course.mikhaylyukovada.bank.service.*;
 import tech.reliab.course.mikhaylyukovada.bank.service.impl.*;
+import tech.reliab.course.mikhaylyukovada.bank.utils.CreatingUtils;
 
-import java.time.LocalDate;
 
 public class Main {
+
+    static CreatingUtils utils = new CreatingUtils();
+
     public static void main(String[] args) {
-        BankService bank = new BankServiceImpl();
-        bank.create(
-                1L,
-                "Sberbank"
-        );
+        BankService bankService = BankServiceImpl.getInstance();
+        BankOfficeService bankOfficeService = BankOfficeServiceImpl.getInstance();
+        EmployeeService employeeService = EmployeeServiceImpl.getInstance();
+        AtmService bankAtmService = AtmServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
+        PaymentAccountService paymentAccountService = PaymentAccountServiceImpl.getInstance();
+        CreditAccountService creditAccountService = CreditAccountServiceImpl.getInstance();
 
-        BankOfficeService bankOffice = new BankOfficeServiceImpl(bank);
-        bankOffice.create(
-                2L,
-                "Sberbank office",
-                "Moscow, Lenin's street 12",
-                true,
-                true,
-                true,
-                true,
-                true,
-                120.
-        );
+        for (int banksNumber = 0; banksNumber < 5; banksNumber++) {
+            Bank bank = bankService.addObject(utils.createBank());
+            Employee employeeForAccount = null;
 
-        EmployeeService employee = new EmployeeServiceImpl(bankOffice);
-        employee.create(
-                3L,
-                "Alex Mironov",
-                LocalDate.of(1990, 8, 11),
-                "Director",
-                "Sberbank",
-                true,
-                bankOffice.read(),
-                true,
-                10000.
-        );
+            for (int officesNumber = 0; officesNumber < 3; officesNumber++) {
+                BankOffice bankOffice = bankOfficeService.addObject(utils.createBankOffice(bank));
 
-        AtmService bankAtm = new AtmServiceImpl(bankOffice);
-        bankAtm.create(
-                bankOffice.read(),
-                4L,
-                "Sberbank ATM",
-                true,
-                "Moscow, Lenin's street 12",
-                employee.read(),
-                true,
-                true,
-                250.
-        );
+                for (int employeeNumber = 0; employeeNumber < 5; employeeNumber++) {
+                    employeeForAccount = employeeService.addObject(utils.createEmployee(bankOffice));
+                    bankAtmService.addObject(utils.createBankAtm(bankOffice, employeeForAccount));
+                }
 
-        UserService user = new UserServiceImpl(bank);
-        user.create(
-                5L,
-                "Max Afdeev",
-                LocalDate.of(1995, 1, 10),
-                "VK",
-                bank.read()
-        );
+            }
 
-        CreditAccountService creditAccount = new CreditAccountServiceImpl();
-        creditAccount.create(
-                6L,
-                user.read(),
-                "Sberbank",
-                LocalDate.of(2022, 2, 20),
-                24,
-                500000.,
-                bank.read().getInterestRate(),
-                employee.read(),
-                "123rt4856"
-        );
+            for (int usersNumber = 0; usersNumber < 5; usersNumber++) {
+                var user = userService.addObject(utils.createUser(bank));
 
-        PaymentAccountService paymentAccount = new PaymentAccountServiceImpl();
-        paymentAccount.create(
-                7L,
-                user.read(),
-                "Sberbank"
-        );
+                for (int accountsNumber = 0; accountsNumber < 2; accountsNumber++) {
+                    PaymentAccount paymentAccount = paymentAccountService.addObject(utils.createPaymentAccount(bank, user));
+                    creditAccountService.addObject(utils.createCreditAccount(bank, user, paymentAccount, employeeForAccount));
+                }
+            }
+        }
 
-        user.read().setCreditAccount(creditAccount.read());
-        user.read().setPaymentAccount(paymentAccount.read());
+        for (int banksNumber = 0; banksNumber < 5; banksNumber++) {
+            bankService.outputBankInfo(bankService.getAllObjects().get(banksNumber).getId());
+            System.out.println();
+        }
 
-        System.out.println(bank.read() + "\n" + bankOffice.read() + "\n" + employee.read() + "\n" + bankAtm.read() + "\n" + user.read() + "\n" + creditAccount.read() + "\n" + paymentAccount.read());
+        System.out.println("FIVE CLIENTS \n");
+
+        for (int number = 0; number < 5; number++) {
+            userService.outputUserAccounts(userService.getAllObjects().get(number).getId());
+            System.out.println();
+        }
     }
+
 }
