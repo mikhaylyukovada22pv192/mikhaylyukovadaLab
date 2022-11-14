@@ -1,35 +1,39 @@
 package tech.reliab.course.mikhaylyukovada.bank.service;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.BankOffice;
+import tech.reliab.course.mikhaylyukovada.bank.service.common.BankObjectService;
 
 /**
  * Интерфейс для взаимодействия с офисами
  */
-public interface BankOfficeService extends Service<BankOffice>{
+public interface BankOfficeService extends BankObjectService<BankOffice> {
 
     /**
-     * Созадет модель офиса
+     * Добавляет новый банкомат в офис
      *
-     * @param id id офиса
-     * @param name название офиса
-     * @param address адрес
-     * @param isWorking работает ли офис
-     * @param isPossibleToPlaceATM возможно ли разместить АТМ
-     * @param isGettingLoan возможно ли оформить кредит
-     * @param isGettingMoney возможно ли снять деньги
-     * @param isGivingMoney возможно ли положить деньги
-     * @param rentPrice стоимость аренды
+     * @param bankOfficeId id офиса
      */
-    void create(Long id, String name, String address, Boolean isWorking, Boolean isPossibleToPlaceATM, Boolean isGettingLoan, Boolean isGettingMoney, Boolean isGivingMoney, Double rentPrice);
+    boolean addAtm(Long bankOfficeId);
 
     /**
-     * Добавляет АТМ
+     * Удаляет банкоматы офиса из банка
+     *
+     * @param bankOfficeId id офиса
      */
-    void addAtm();
+    boolean deleteAtm(Long bankOfficeId);
 
     /**
-     * Добавляет сотрудника
+     * Добавляет нового сотрудника в офис
+     *
+     * @param bankOfficeId id офиса
      */
-    void addEmployee();
+    boolean addEmployee(Long bankOfficeId);
+
+    /**
+     * Удаляет сотрудников офиса из банка
+     *
+     * @param bankOfficeId id офиса
+     */
+    boolean deleteEmployee(Long bankOfficeId);
 
 }

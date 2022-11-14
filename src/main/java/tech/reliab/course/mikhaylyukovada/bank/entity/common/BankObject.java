@@ -1,4 +1,4 @@
-package tech.reliab.course.mikhaylyukovada.bank.entity.models;
+package tech.reliab.course.mikhaylyukovada.bank.entity.common;
 
 /**
  * Общая модель данных

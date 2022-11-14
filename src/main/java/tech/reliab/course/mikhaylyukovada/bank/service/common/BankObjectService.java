@@ -1,15 +1,14 @@
-package tech.reliab.course.mikhaylyukovada.bank.repository.common;
+package tech.reliab.course.mikhaylyukovada.bank.service.common;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.common.BankObject;
-
 import java.util.List;
 
 /**
- * Интерфейс с методами для взаимодейтсвия с банковскими объектами
+ * Интерфейс общих сервисов банка
  *
  * @param <T> объекты банка
  */
-public interface BankObjectRepository<T extends BankObject> {
+public interface BankObjectService<T extends BankObject> {
 
     /**
      * Добавляет объект
@@ -17,7 +16,7 @@ public interface BankObjectRepository<T extends BankObject> {
      *
      * @param object объект
      */
-    T add(T object);
+    T addObject(T object);
 
     /**
      * Обновляет объект
@@ -25,7 +24,7 @@ public interface BankObjectRepository<T extends BankObject> {
      *
      * @param object объект
      */
-    T update(T object);
+    T updateObject(T object);
 
     /**
      * Удаляет объект по id
@@ -33,17 +32,17 @@ public interface BankObjectRepository<T extends BankObject> {
      *
      * @param id id объекта
      */
-    boolean deleteById(Long id);
+    boolean deleteObjectById(Long id);
 
     /**
      * @return объект по заданному id
      *
      * @param id id объекта
      */
-    T findById(Long id);
+    T getObjectById(Long id);
 
     /**
      * @return список объектов
      */
-    List<T> findAll();
+    List<T> getAllObjects();
 }

@@ -1,6 +1,6 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.models.BankObject;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.BankObject;
 
 /**
  * Модель банка

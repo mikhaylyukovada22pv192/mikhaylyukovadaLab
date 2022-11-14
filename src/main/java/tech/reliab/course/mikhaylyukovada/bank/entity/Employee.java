@@ -1,6 +1,6 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.models.Person;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.Person;
 import java.time.LocalDate;
 
 /**

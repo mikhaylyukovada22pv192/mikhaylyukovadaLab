@@ -2,26 +2,62 @@ package tech.reliab.course.mikhaylyukovada.bank.service.impl;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.BankOffice;
 import tech.reliab.course.mikhaylyukovada.bank.entity.Employee;
+import tech.reliab.course.mikhaylyukovada.bank.repository.EmployeeRepository;
 import tech.reliab.course.mikhaylyukovada.bank.service.BankOfficeService;
-import tech.reliab.course.mikhaylyukovada.bank.service.BankService;
 import tech.reliab.course.mikhaylyukovada.bank.service.EmployeeService;
-
-import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Реализация интерфейса для взаимодействия с сотрудниками
  */
-public class EmployeeServiceImpl extends ServiceImpl<Employee> implements EmployeeService {
+public class EmployeeServiceImpl implements EmployeeService {
+    private static EmployeeServiceImpl INSTANCE;
 
-    private BankOfficeService bankOfficeService;
+    public static EmployeeServiceImpl getInstance() {
+        if (INSTANCE == null) { INSTANCE = new EmployeeServiceImpl(); }
 
-    public EmployeeServiceImpl(BankOfficeService bankOfficeService) {
-        this.bankOfficeService = bankOfficeService;
+        return INSTANCE;
+    }
+
+    private final EmployeeRepository employeeRepository = EmployeeRepository.getInstance();
+    private final BankOfficeService bankOfficeService = BankOfficeServiceImpl.getInstance();
+
+    @Override
+    public Employee addObject(Employee employee) {
+        Employee newEmployee = employeeRepository.add(employee);
+        BankOffice office = newEmployee.getBankOffice();
+
+        if (office != null) {
+            bankOfficeService.addEmployee(office.getId());
+        }
+
+        return newEmployee;
+
     }
 
     @Override
-    public void create(Long id, String name, LocalDate birthDate, String jobTitle, String bankName, Boolean isWorkingInOffice, BankOffice bankOffice, Boolean isPossibleGetLoan, Double salary) {
-        this.model = new Employee(id, name, birthDate, jobTitle, bankName, isWorkingInOffice, bankOffice, isPossibleGetLoan, salary);
-        bankOfficeService.addEmployee();
+    public Employee updateObject(Employee employee) {
+        return employeeRepository.update(employee);
     }
+
+    @Override
+    public boolean deleteObjectById(Long id) {
+        Long officeId = employeeRepository.findById(id).getBankOffice().getId();
+
+        if (bankOfficeService.deleteEmployee(officeId)) {
+            return employeeRepository.deleteById(id);
+        }
+        return false;
+    }
+
+    @Override
+    public Employee getObjectById(Long id) {
+        return employeeRepository.findById(id);
+    }
+
+    @Override
+    public List<Employee> getAllObjects() {
+        return employeeRepository.findAll();
+    }
+
 }

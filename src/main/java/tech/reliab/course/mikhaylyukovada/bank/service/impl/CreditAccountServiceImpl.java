@@ -1,21 +1,51 @@
 package tech.reliab.course.mikhaylyukovada.bank.service.impl;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.CreditAccount;
-import tech.reliab.course.mikhaylyukovada.bank.entity.Employee;
-import tech.reliab.course.mikhaylyukovada.bank.entity.User;
+import tech.reliab.course.mikhaylyukovada.bank.repository.CreditAccountRepository;
 import tech.reliab.course.mikhaylyukovada.bank.service.CreditAccountService;
-import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Реализация интерфейса для взаимодействия с кредитными счетами
  */
-public class CreditAccountServiceImpl extends ServiceImpl<CreditAccount> implements CreditAccountService {
+public class CreditAccountServiceImpl implements CreditAccountService {
+    private static CreditAccountServiceImpl INSTANCE;
+
+    public static CreditAccountServiceImpl getInstance() {
+        if (INSTANCE == null) { INSTANCE = new CreditAccountServiceImpl(); }
+
+        return INSTANCE;
+    }
+
+    private final CreditAccountRepository creditAccountRepository = CreditAccountRepository.getInstance();
 
     @Override
-    public void create(Long id, User user, String bankName, LocalDate startDate, Integer monthsNumber, Double creditAmount, Double interestRate, Employee employee, String paymentAccount) {
-        this.model = new CreditAccount(id, user, bankName, startDate, monthsNumber, creditAmount, interestRate, employee, paymentAccount);
+    public CreditAccount addObject(CreditAccount creditAccount) {
+        creditAccount.setEndDate(creditAccount.getStartDate().plusMonths(creditAccount.getMonthsNumber()));
 
-        model.setCreditAmount(model.getCreditAmount() / model.getMonthsNumber().doubleValue() * model.getInterestRate());
-        model.setEndDate(model.getStartDate().plusMonths(model.getMonthsNumber()));
+        var monthlyPayment = creditAccount.getCreditAmount() / creditAccount.getMonthsNumber().doubleValue() * creditAccount.getInterestRate();
+        creditAccount.setMonthlyPayment(monthlyPayment);
+
+        return creditAccountRepository.add(creditAccount);
+    }
+
+    @Override
+    public CreditAccount updateObject(CreditAccount creditAccount) {
+        return creditAccountRepository.update(creditAccount);
+    }
+
+    @Override
+    public boolean deleteObjectById(Long id) {
+        return creditAccountRepository.deleteById(id);
+    }
+
+    @Override
+    public CreditAccount getObjectById(Long id) {
+        return creditAccountRepository.findById(id);
+    }
+
+    @Override
+    public List<CreditAccount> getAllObjects() {
+        return creditAccountRepository.findAll();
     }
 }

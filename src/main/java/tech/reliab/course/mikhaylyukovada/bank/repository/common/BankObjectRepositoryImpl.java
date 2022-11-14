@@ -1,6 +1,6 @@
 package tech.reliab.course.mikhaylyukovada.bank.repository.common;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.models.BankObject;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.BankObject;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,6 @@ import java.util.Map;
  * @param <T> объекты банка
  */
 public abstract class BankObjectRepositoryImpl<T extends BankObject> implements BankObjectRepository<T>{
-
     private long currentId = 1L;
     private final Map<Long, T> repository = new LinkedHashMap<>();
 
@@ -21,6 +20,13 @@ public abstract class BankObjectRepositoryImpl<T extends BankObject> implements 
         object.setId(currentId++);
         this.repository.put(object.getId(), object);
         return object;
+    }
+
+    public T update(T object) {
+        if (object == null || !this.repository.containsKey(object.getId())) { return null; }
+
+        this.repository.replace(object.getId(), object);
+        return findById(object.getId());
     }
 
     public boolean deleteById(Long id) {
@@ -38,10 +44,4 @@ public abstract class BankObjectRepositoryImpl<T extends BankObject> implements 
         return this.repository.values().stream().toList();
     }
 
-    public T update(T object) {
-        if (object == null || !this.repository.containsKey(object.getId())) { return null; }
-
-        this.repository.replace(object.getId(), object);
-        return findById(object.getId());
-    }
 }
