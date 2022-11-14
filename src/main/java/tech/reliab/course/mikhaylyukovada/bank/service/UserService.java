@@ -2,7 +2,6 @@ package tech.reliab.course.mikhaylyukovada.bank.service;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.User;
 import tech.reliab.course.mikhaylyukovada.bank.service.common.BankObjectService;
-import java.io.OutputStream;
 
 /**
  * Интерфейс для взаимодействия с пользователями
