@@ -8,11 +8,25 @@ public class BankObject {
     protected Long id;
 
     /**
+     * Путой конструктор модели
+     */
+    public BankObject() {}
+
+    /**
      * Конструктор для создания модели
      *
      * @param id id объекта
      */
     public BankObject(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Задает id объекта
+     *
+     * @param id id объекта
+     */
+    public void setId(Long id) {
         this.id = id;
     }
 

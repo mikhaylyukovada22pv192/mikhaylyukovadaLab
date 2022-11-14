@@ -13,13 +13,10 @@ public class PaymentAccount extends BankObject {
     /**
      * Коснтруктор для создания модель платежного счета
      *
-     * @param id id счета
      * @param user пользователь счета
      * @param bankName название банка
      */
-    public PaymentAccount(Long id, User user, String bankName) {
-        super(id);
-        this.id = id;
+    public PaymentAccount(User user, String bankName) {
         this.user = user;
         this.bankName = bankName;
     }

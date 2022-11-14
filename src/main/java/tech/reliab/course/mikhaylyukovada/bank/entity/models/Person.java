@@ -11,10 +11,22 @@ public class Person extends BankObject {
     protected LocalDate birthDate;
 
     /**
-     * Конструктор для создания модули человека
+     * Конструктор для создания модели человека
+     *
+     * @param name имя человека
+     * @param birthDate дата рождения
+     */
+    public Person(String name, LocalDate birthDate) {
+        this.name = name;
+        this.birthDate = birthDate;
+    }
+
+    /**
+     * Конструктор для создания модели человека
      *
      * @param id id человека
      * @param name имя человека
+     * @param birthDate дата рождения
      */
     public Person(Long id, String name, LocalDate birthDate) {
         super(id);
