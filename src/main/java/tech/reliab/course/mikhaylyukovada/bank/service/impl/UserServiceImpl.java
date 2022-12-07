@@ -2,6 +2,8 @@ package tech.reliab.course.mikhaylyukovada.bank.service.impl;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.Bank;
 import tech.reliab.course.mikhaylyukovada.bank.entity.User;
+import tech.reliab.course.mikhaylyukovada.bank.exceptions.IdNotFoundException;
+import tech.reliab.course.mikhaylyukovada.bank.exceptions.WrongNameException;
 import tech.reliab.course.mikhaylyukovada.bank.repository.CreditAccountRepository;
 import tech.reliab.course.mikhaylyukovada.bank.repository.PaymentAccountRepository;
 import tech.reliab.course.mikhaylyukovada.bank.repository.UserRepository;
@@ -26,6 +28,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addObject(User user) {
+        if (user.getName().isBlank()) {
+            throw new WrongNameException();
+        }
+
         User newUser = userRepository.add(user);
         List<Bank> banks = user.getBanks();
 
@@ -57,13 +63,17 @@ public class UserServiceImpl implements UserService {
             }
 
             return true;
+        } else {
+            throw new IdNotFoundException();
         }
-
-        return false;
     }
 
     @Override
     public User getObjectById(Long id) {
+        if (id == null) {
+            throw new IdNotFoundException();
+        }
+
         return userRepository.findById(id);
     }
 

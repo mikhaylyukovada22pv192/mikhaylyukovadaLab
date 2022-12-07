@@ -19,7 +19,7 @@ public class CreditAccount extends BankObject {
     private PaymentAccount paymentAccount;
 
     /**
-     * Консструктор для создания модели кредитного счета
+     * Конструктор для создания модели кредитного счета
      *
      * @param user пользователь кредитного счета
      * @param bankName название банка

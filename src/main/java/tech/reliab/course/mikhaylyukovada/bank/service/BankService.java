@@ -1,6 +1,7 @@
 package tech.reliab.course.mikhaylyukovada.bank.service;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.Bank;
+import tech.reliab.course.mikhaylyukovada.bank.exceptions.FailedLoanException;
 import tech.reliab.course.mikhaylyukovada.bank.service.common.BankObjectService;
 
 /**
@@ -14,4 +15,12 @@ public interface BankService extends BankObjectService<Bank>  {
      * @param bankId id банка
      */
     void outputBankInfo(Long bankId);
+
+    /**
+     * Выдает кредит и возвраащет его id
+     *
+     * @param userId id пользователя
+     * @param creditSum сумма кредита
+     */
+    Long getLoan(Long userId, Double creditSum) throws FailedLoanException;
 }

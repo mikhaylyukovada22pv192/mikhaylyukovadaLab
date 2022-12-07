@@ -175,6 +175,15 @@ public class BankAtm extends BankObject {
     }
 
     /**
+     * Задает общее кол-во денег
+     *
+     * @param totalMoney кол-во денег
+     */
+    public void setTotalMoney(Double totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
+    /**
      * Отчищает данные банкомата
      */
     public void clearBankAtm() {

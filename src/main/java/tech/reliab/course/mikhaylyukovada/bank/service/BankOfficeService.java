@@ -2,6 +2,7 @@ package tech.reliab.course.mikhaylyukovada.bank.service;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.BankOffice;
 import tech.reliab.course.mikhaylyukovada.bank.service.common.BankObjectService;
+import java.util.List;
 
 /**
  * Интерфейс для взаимодействия с офисами
@@ -36,4 +37,10 @@ public interface BankOfficeService extends BankObjectService<BankOffice> {
      */
     boolean deleteEmployee(Long bankOfficeId);
 
+    /**
+     * Возвращает все офисы банка
+     *
+     * @param bankId id банка
+     */
+    List<BankOffice> getAllBankOfficesByBankId(Long bankId);
 }

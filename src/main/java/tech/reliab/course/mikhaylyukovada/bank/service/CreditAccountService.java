@@ -1,6 +1,6 @@
 package tech.reliab.course.mikhaylyukovada.bank.service;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.CreditAccount;
+import tech.reliab.course.mikhaylyukovada.bank.entity.*;
 import tech.reliab.course.mikhaylyukovada.bank.service.common.BankObjectService;
 
 /**
@@ -8,5 +8,15 @@ import tech.reliab.course.mikhaylyukovada.bank.service.common.BankObjectService;
  */
 public interface CreditAccountService extends BankObjectService<CreditAccount> {
 
-    //TODO: Добавить уникальные методы для кредитного счета
+    /**
+     * Создает и возвращает модель кредитного счета
+     *
+     * @param user пользователь счета
+     * @param bank банк
+     * @param employee сотрудник
+     * @param paymentAccount платежный счет
+     * @param sum сумма кредита
+     * @param monthNumber кол-во месяцев
+     */
+    CreditAccount createCreditAccount(Bank bank, User user, PaymentAccount paymentAccount, Employee employee, Double sum, int monthNumber);
 }
