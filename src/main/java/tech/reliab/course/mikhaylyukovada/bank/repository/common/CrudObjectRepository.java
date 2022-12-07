@@ -5,11 +5,11 @@ import tech.reliab.course.mikhaylyukovada.bank.entity.common.BankObject;
 import java.util.List;
 
 /**
- * Интерфейс с методами для взаимодейтсвия с банковскими объектами
+ * Интерфейс с методами CRUD для взаимодейтсвия с объектами
  *
  * @param <T> объекты банка
  */
-public interface BankObjectRepository<T extends BankObject> {
+public interface CrudObjectRepository<T extends BankObject> {
 
     /**
      * Добавляет объект

@@ -4,7 +4,7 @@ import tech.reliab.course.mikhaylyukovada.bank.entity.*;
 import java.time.LocalDate;
 import java.util.Random;
 
-public class CreatingUtils {
+public class BankEntityGenerator {
     private static final Random random = new Random();
     private static long number = 0L;
 

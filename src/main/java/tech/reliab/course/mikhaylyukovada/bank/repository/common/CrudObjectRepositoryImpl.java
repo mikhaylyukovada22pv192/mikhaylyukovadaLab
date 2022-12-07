@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Реализация интерфейса с методами для взаимодейтсвия с банковскими объектами
+ * Реализация интерфейса с методами CRUD для взаимодействия с объектами
  *
- * @param <T> объекты банка
+ * @param <T> объекты
  */
-public abstract class BankObjectRepositoryImpl<T extends BankObject> implements BankObjectRepository<T>{
+public abstract class CrudObjectRepositoryImpl<T extends BankObject> implements CrudObjectRepository<T> {
     private long currentId = 1L;
     private final Map<Long, T> repository = new LinkedHashMap<>();
 
