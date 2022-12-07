@@ -2,7 +2,6 @@ package tech.reliab.course.mikhaylyukovada.bank.service;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.BankOffice;
 import tech.reliab.course.mikhaylyukovada.bank.service.common.BasicModelService;
-import tech.reliab.course.mikhaylyukovada.bank.service.common.BankObjectService;
 import java.util.List;
 
 /**

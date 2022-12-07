@@ -4,7 +4,6 @@ import tech.reliab.course.mikhaylyukovada.bank.entity.Bank;
 import tech.reliab.course.mikhaylyukovada.bank.entity.PaymentAccount;
 import tech.reliab.course.mikhaylyukovada.bank.service.common.BasicModelService;
 import tech.reliab.course.mikhaylyukovada.bank.entity.User;
-import tech.reliab.course.mikhaylyukovada.bank.service.common.BankObjectService;
 import java.util.List;
 
 /**

@@ -3,7 +3,6 @@ package tech.reliab.course.mikhaylyukovada.bank.service;
 import tech.reliab.course.mikhaylyukovada.bank.entity.Bank;
 import tech.reliab.course.mikhaylyukovada.bank.service.common.BasicModelService;
 import tech.reliab.course.mikhaylyukovada.bank.exceptions.FailedLoanException;
-import tech.reliab.course.mikhaylyukovada.bank.service.common.BankObjectService;
 
 /**
  * Интерфейс для взаимодействия с банками
