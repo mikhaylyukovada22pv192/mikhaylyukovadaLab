@@ -94,11 +94,9 @@ public class BankServiceImpl implements BankService {
 
         var users = userRepository.findAll().stream()
                 .filter(user -> user.getBanks().stream()
-                        .filter(bank ->
+                        .anyMatch(bank ->
                                 bank.getId().compareTo(bankId) == 0
                         )
-                        .toList()
-                        .size() > 0
                 )
                 .toList();
 
