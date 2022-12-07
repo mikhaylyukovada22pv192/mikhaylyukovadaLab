@@ -1,23 +1,23 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity.common;
 
 /**
- * Общая модель данных
+ * Базовая модель данных
  */
-public class BankObject {
+public class BasicModel {
 
     protected Long id;
 
     /**
      * Путой конструктор модели
      */
-    public BankObject() {}
+    public BasicModel() {}
 
     /**
      * Конструктор для создания модели
      *
      * @param id id объекта
      */
-    public BankObject(Long id) {
+    public BasicModel(Long id) {
         this.id = id;
     }
 

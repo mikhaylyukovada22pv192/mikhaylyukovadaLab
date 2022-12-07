@@ -1,11 +1,11 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.common.BankObject;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.BasicModel;
 
 /**
  * Модель банка
  */
-public class Bank extends BankObject {
+public class Bank extends BasicModel {
 
     private String name;
     private Integer officesNumber = 0;

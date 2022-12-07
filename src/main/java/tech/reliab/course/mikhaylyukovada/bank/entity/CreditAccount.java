@@ -1,12 +1,12 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.common.BankObject;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.BasicModel;
 import java.time.LocalDate;
 
 /**
  * Модель кредитного счета
  */
-public class CreditAccount extends BankObject {
+public class CreditAccount extends BasicModel {
     private User user;
     private String bankName;
     private LocalDate startDate;
