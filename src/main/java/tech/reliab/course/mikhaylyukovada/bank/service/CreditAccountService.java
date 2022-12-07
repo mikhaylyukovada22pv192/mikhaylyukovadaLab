@@ -1,12 +1,14 @@
 package tech.reliab.course.mikhaylyukovada.bank.service;
 
+import tech.reliab.course.mikhaylyukovada.bank.entity.CreditAccount;
+import tech.reliab.course.mikhaylyukovada.bank.service.common.BasicModelService;
 import tech.reliab.course.mikhaylyukovada.bank.entity.*;
 import tech.reliab.course.mikhaylyukovada.bank.service.common.BankObjectService;
 
 /**
  * Интерфейс для взаимодействия с кредитными счетами
  */
-public interface CreditAccountService extends BankObjectService<CreditAccount> {
+public interface CreditAccountService extends BasicModelService<CreditAccount> {
 
     /**
      * Создает и возвращает модель кредитного счета
