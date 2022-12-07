@@ -1,12 +1,14 @@
 package tech.reliab.course.mikhaylyukovada.bank;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.*;
+import tech.reliab.course.mikhaylyukovada.bank.exceptions.FailedLoanException;
 import tech.reliab.course.mikhaylyukovada.bank.service.*;
 import tech.reliab.course.mikhaylyukovada.bank.service.impl.*;
-import tech.reliab.course.mikhaylyukovada.bank.utils.CreatingUtils;
-
+import tech.reliab.course.mikhaylyukovada.bank.utils.BankEntityGenerator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Random;
-
+import java.util.Scanner;
 
 public class Main {
 
@@ -16,53 +18,8 @@ public class Main {
     private static final double CREDIT_SUM = 1000000;
 
     public static void main(String[] args) {
-        BankService bankService = BankServiceImpl.getInstance();
-        UserService userService = UserServiceImpl.getInstance();
-        Scanner input = new Scanner(System.in);
-
         generateBank(5, 3, 5, 5, 2);
-
-        System.out.println("\nAll banks name:\n");
-        bankService.getAllObjects().forEach(bank -> System.out.println(bank.getName()));
-
-        String bankName = null;
-        while(bankName == null || bankName.isEmpty()) {
-            System.out.println("\nInput bank name to get more info:");
-            bankName = input.nextLine();
-        }
-
-        try {
-            String finalBankName = bankName;
-            var requiredBank = bankService.getAllObjects().stream().filter(bank ->
-                    Objects.equals(bank.getName(), finalBankName)
-            ).findFirst().get();
-
-            bankService.outputBankInfo(requiredBank.getId());
-            System.out.println();
-        } catch (NoSuchElementException e) {
-            System.out.println("No such bank. " + e.getMessage());
-        }
-
-        System.out.println("\nAll clients name:\n");
-        userService.getAllObjects().forEach(user -> System.out.println(user.getName()));
-
-        String userName = null;
-        while(userName == null || userName.isEmpty()) {
-            System.out.println("\nInput user name to get more info:");
-            userName = input.nextLine();
-        }
-
-        try {
-            String finalUserName = bankName;
-            var requiredUser = userService.getAllObjects().stream().filter(bank ->
-                    Objects.equals(bank.getName(), finalUserName)
-            ).findFirst().get();
-
-            userService.outputUserAccounts(requiredUser.getId());
-            System.out.println();
-        } catch (NoSuchElementException e) {
-            System.out.println("No such user. " + e.getMessage());
-        }
+        getLoanForUser();
     }
 
     private static void generateBank(int numberOfBanks, int numberOfOffices, int numberOfEmployes, int numberOfUsers, int numberOfAccounts) {
@@ -99,18 +56,85 @@ public class Main {
         }
     }
 
-    /*
-    for (int userNumber = 0; userNumber < userService.getAllObjects().size(); userNumber++) {
-            var userId = userService.getAllObjects().get(userNumber).getId();
-            System.out.println("For user with id = " + userId);
+    // Функция для ЛР 2
+    private static void outputBankAndClient() {
+        BankService bankService = BankServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("\nAll banks name:\n");
+        bankService.getAllObjects().forEach(bank -> System.out.println(bank.getName()));
+
+        String bankName = null;
+        while (bankName == null || bankName.isEmpty()) {
+            System.out.println("\nInput bank name to get more info:");
+            bankName = input.nextLine();
+        }
+
+        try {
+            String finalBankName = bankName;
+            var requiredBank = bankService.getAllObjects().stream().filter(bank ->
+                    Objects.equals(bank.getName(), finalBankName)
+            ).findFirst().get();
+
+            bankService.outputBankInfo(requiredBank.getId());
+            System.out.println();
+        } catch (NoSuchElementException e) {
+            System.out.println("No such bank. " + e.getMessage());
+        }
+
+        System.out.println("\nAll clients name:\n");
+        userService.getAllObjects().forEach(user -> System.out.println(user.getName()));
+
+        String userName = null;
+        while (userName == null || userName.isEmpty()) {
+            System.out.println("\nInput user name to get more info:");
+            userName = input.nextLine();
+        }
+
+        try {
+            String finalUserName = userName;
+            var requiredUser = userService.getAllObjects().stream().filter(bank ->
+                    Objects.equals(bank.getName(), finalUserName)
+            ).findFirst().get();
+
+            userService.outputUserAccounts(requiredUser.getId());
+            System.out.println();
+        } catch (NoSuchElementException e) {
+            System.out.println("No such user. " + e.getMessage());
+        }
+    }
+
+    // Функция для ЛР 3
+    private static void getLoanForUser() {
+        BankService bankService = BankServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("\nAll clients name:\n");
+        userService.getAllObjects().forEach(user -> System.out.println(user.getName()));
+
+        String userName = null;
+        while (userName == null || userName.isEmpty()) {
+            System.out.println("\nInput user name to get a loan for him:");
+            userName = input.nextLine();
+        }
+
+        try {
+            String finalUserName = userName;
+            var requiredUser = userService.getAllObjects().stream().filter(bank ->
+                    Objects.equals(bank.getName(), finalUserName)
+            ).findFirst().get();
+
             try {
-                var creditId = bankService.getLoan(userId, RANDOM.nextDouble() * CREDIT_SUM + MIN_CREDIT_SUM);
+                var creditId = bankService.getLoan(requiredUser.getId(), RANDOM.nextDouble() * CREDIT_SUM + MIN_CREDIT_SUM);
                 System.out.println("Successfully get a loan with id = " + creditId);
             } catch (FailedLoanException failedLoanException) {
                 System.out.println("Failed to get a loan");
             }
-            System.out.println();
+        } catch (NoSuchElementException e) {
+            System.out.println("No such user. " + e.getMessage());
         }
-    */
+    }
 
 }
