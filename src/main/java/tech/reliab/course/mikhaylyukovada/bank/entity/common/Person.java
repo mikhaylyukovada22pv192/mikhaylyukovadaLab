@@ -10,6 +10,8 @@ public class Person extends BankObject {
     protected String name;
     protected LocalDate birthDate;
 
+    public Person() {}
+
     /**
      * Конструктор для создания модели человека
      *

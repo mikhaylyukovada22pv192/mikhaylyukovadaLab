@@ -16,6 +16,7 @@ public class BankAtm extends BankObject {
     private Double totalMoney;
     private Double maintenanceCost;
 
+    public BankAtm() {}
     /**
      * Конструктор для создания модели АТМ
      *

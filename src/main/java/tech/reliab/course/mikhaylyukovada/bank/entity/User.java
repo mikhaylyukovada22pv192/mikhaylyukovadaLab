@@ -16,6 +16,10 @@ public class User extends Person {
     private PaymentAccount paymentAccount = null;
     private Double creditRating;
 
+    public User() {
+        super();
+    }
+
     /**
      * Конструктор для создания модели пользователя
      *
@@ -117,6 +121,15 @@ public class User extends Person {
      */
     public void setCreditRating(Double creditRating) {
         this.creditRating = creditRating;
+    }
+
+    /**
+     * Задает банки пользователся
+     *
+     * @param banks список банков
+     */
+    public void setBanks(List<Bank> banks) {
+        this.banks = banks;
     }
 
     /**

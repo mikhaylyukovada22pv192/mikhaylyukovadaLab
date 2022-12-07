@@ -5,6 +5,7 @@ import tech.reliab.course.mikhaylyukovada.bank.exceptions.FailedLoanException;
 import tech.reliab.course.mikhaylyukovada.bank.service.*;
 import tech.reliab.course.mikhaylyukovada.bank.service.impl.*;
 import tech.reliab.course.mikhaylyukovada.bank.utils.CreatingUtils;
+import java.io.IOException;
 import java.util.Random;
 
 public class Main {
@@ -59,6 +60,13 @@ public class Main {
             }
             System.out.println();
         }
+
+        var userId = userService.getAllObjects().get(0).getId();
+
+        bankService.exportAccounts(bankService.getAllObjects().get(0).getId(), "/Users/darmi/LR4/accounts.txt");
+        bankService.transferAccounts(bankService.getAllObjects().get(0).getId(), bankService.getAllObjects().get(1).getId());
+
+        userService.outputUserAccounts(userId);
     }
 
 }

@@ -26,4 +26,11 @@ public interface PaymentAccountService extends BankObjectService<PaymentAccount>
      * @param user пользователь
      */
     PaymentAccount getPaymentAccount(Bank bank, User user);
+
+    /**
+     * Возвращает все счета, хранящиеся в банке
+     *
+     * @param bank банк
+     */
+    List<PaymentAccount> getAllPaymentAccounts(Bank bank);
 }

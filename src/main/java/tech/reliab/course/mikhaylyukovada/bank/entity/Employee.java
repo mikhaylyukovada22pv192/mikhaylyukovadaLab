@@ -14,6 +14,7 @@ public class Employee extends Person {
     private Boolean isPossibleGetLoan;
     private Double salary;
 
+    public Employee() {}
     /**
      * Конструктор для создания модели сотрудника
      *

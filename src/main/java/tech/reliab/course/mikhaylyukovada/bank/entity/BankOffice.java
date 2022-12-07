@@ -18,6 +18,7 @@ public class BankOffice extends BankObject {
     private Double totalMoney;
     private Double rentPrice;
 
+    public BankOffice() {}
     /**
      * Конструктор для создания модели банковского офиса
      *

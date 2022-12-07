@@ -79,4 +79,12 @@ public class PaymentAccountServiceImpl implements PaymentAccountService {
                     .findFirst().get();
         }
     }
+
+    @Override
+    public List<PaymentAccount> getAllPaymentAccounts(Bank bank) {
+        return paymentAccountRepository.findAll()
+                .stream()
+                .filter(account -> account.getBankName().equals(bank.getName()))
+                .toList();
+    }
 }

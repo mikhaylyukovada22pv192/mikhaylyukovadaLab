@@ -18,6 +18,8 @@ public class CreditAccount extends BankObject {
     private Employee employee;
     private PaymentAccount paymentAccount;
 
+    public CreditAccount(){}
+
     /**
      * Конструктор для создания модели кредитного счета
      *

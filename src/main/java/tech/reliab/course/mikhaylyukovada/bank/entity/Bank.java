@@ -16,6 +16,8 @@ public class Bank extends BankObject {
     private Double totalMoney;
     private Double interestRate;
 
+    public Bank() {}
+
     /**
      * Конструктор для создания модели банка
      *
