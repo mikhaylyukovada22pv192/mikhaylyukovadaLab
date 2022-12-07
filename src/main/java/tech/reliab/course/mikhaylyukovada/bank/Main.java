@@ -4,6 +4,9 @@ import tech.reliab.course.mikhaylyukovada.bank.entity.*;
 import tech.reliab.course.mikhaylyukovada.bank.service.*;
 import tech.reliab.course.mikhaylyukovada.bank.service.impl.*;
 import tech.reliab.course.mikhaylyukovada.bank.utils.BankEntityGenerator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Scanner;
 
 
 public class Main {
@@ -13,25 +16,51 @@ public class Main {
     public static void main(String[] args) {
         BankService bankService = BankServiceImpl.getInstance();
         UserService userService = UserServiceImpl.getInstance();
+        Scanner input = new Scanner(System.in);
 
         generateBank(5, 3, 5, 5, 2);
 
-        System.out.println("ALL BANKS \n");
+        System.out.println("\nAll banks name:\n");
+        bankService.getAllObjects().forEach(bank -> System.out.println(bank.getName()));
 
-        bankService.getAllObjects().forEach(bank -> {
-                    bankService.outputBankInfo(bank.getId());
-                    System.out.println();
-                }
-        );
+        String bankName = null;
+        while(bankName == null || bankName.isEmpty()) {
+            System.out.println("\nInput bank name to get more info:");
+            bankName = input.nextLine();
+        }
 
-        System.out.println("ALL CLIENTS \n");
+        try {
+            String finalBankName = bankName;
+            var requiredBank = bankService.getAllObjects().stream().filter(bank ->
+                    Objects.equals(bank.getName(), finalBankName)
+            ).findFirst().get();
 
-        userService.getAllObjects().forEach(user -> {
-                    userService.outputUserAccounts(user.getId());
-                    System.out.println();
-                }
-        );
+            bankService.outputBankInfo(requiredBank.getId());
+            System.out.println();
+        } catch (NoSuchElementException e) {
+            System.out.println("No such bank. " + e.getMessage());
+        }
 
+        System.out.println("\nAll clients name:\n");
+        userService.getAllObjects().forEach(user -> System.out.println(user.getName()));
+
+        String userName = null;
+        while(userName == null || userName.isEmpty()) {
+            System.out.println("\nInput user name to get more info:");
+            userName = input.nextLine();
+        }
+
+        try {
+            String finalUserName = bankName;
+            var requiredUser = userService.getAllObjects().stream().filter(bank ->
+                    Objects.equals(bank.getName(), finalUserName)
+            ).findFirst().get();
+
+            userService.outputUserAccounts(requiredUser.getId());
+            System.out.println();
+        } catch (NoSuchElementException e) {
+            System.out.println("No such user. " + e.getMessage());
+        }
     }
 
     private static void generateBank(int numberOfBanks, int numberOfOffices, int numberOfEmployes, int numberOfUsers, int numberOfAccounts) {
