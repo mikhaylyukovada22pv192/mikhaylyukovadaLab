@@ -209,10 +209,8 @@ public class BankServiceImpl implements BankService {
         AccountsRepository accountsRepository = new AccountsRepository(paymentAccounts, creditAccounts);
 
         try {
-            FileWriter writer = new FileWriter(filename, false);
-            String accountsJson = objectMapper.writeValueAsString(accountsRepository);
-            writer.write(accountsJson);
-            writer.flush();
+            File file = new File(filename);
+            objectMapper.writeValue(file, accountsRepository);
         } catch (IOException e) {
             System.out.println("Something went wrong in IO stream.\n" + e.getMessage());
         }
