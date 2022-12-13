@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class Main {
 
     static BankEntityGenerator generator = new BankEntityGenerator();
@@ -94,8 +95,8 @@ public class Main {
 
         try {
             String finalUserName = userName;
-            var requiredUser = userService.getAllObjects().stream().filter(bank ->
-                    Objects.equals(bank.getName(), finalUserName)
+            var requiredUser = userService.getAllObjects().stream().filter(user ->
+                    Objects.equals(user.getName(), finalUserName)
             ).findFirst().get();
 
             userService.outputUserAccounts(requiredUser.getId());
