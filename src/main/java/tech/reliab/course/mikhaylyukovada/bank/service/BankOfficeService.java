@@ -1,13 +1,13 @@
 package tech.reliab.course.mikhaylyukovada.bank.service;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.BankOffice;
-import tech.reliab.course.mikhaylyukovada.bank.service.common.BankObjectService;
+import tech.reliab.course.mikhaylyukovada.bank.service.common.BasicModelService;
 import java.util.List;
 
 /**
  * Интерфейс для взаимодействия с офисами
  */
-public interface BankOfficeService extends BankObjectService<BankOffice> {
+public interface BankOfficeService extends BasicModelService<BankOffice> {
 
     /**
      * Добавляет новый банкомат в офис

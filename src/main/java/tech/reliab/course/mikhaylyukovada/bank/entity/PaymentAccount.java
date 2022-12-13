@@ -1,11 +1,11 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.common.BankObject;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.BasicModel;
 
 /**
  * Модель платежного счета
  */
-public class PaymentAccount extends BankObject {
+public class PaymentAccount extends BasicModel {
     private User user;
     private String bankName;
     private Double moneyAmount = 0.;

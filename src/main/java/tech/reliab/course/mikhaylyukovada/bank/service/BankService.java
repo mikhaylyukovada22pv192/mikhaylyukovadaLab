@@ -1,14 +1,13 @@
 package tech.reliab.course.mikhaylyukovada.bank.service;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.Bank;
+import tech.reliab.course.mikhaylyukovada.bank.service.common.BasicModelService;
 import tech.reliab.course.mikhaylyukovada.bank.exceptions.FailedLoanException;
-import tech.reliab.course.mikhaylyukovada.bank.service.common.BankObjectService;
-import java.io.IOException;
 
 /**
  * Интерфейс для взаимодействия с банками
  */
-public interface BankService extends BankObjectService<Bank>  {
+public interface BankService extends BasicModelService<Bank> {
 
     /**
      * Вывод всей информации о банке

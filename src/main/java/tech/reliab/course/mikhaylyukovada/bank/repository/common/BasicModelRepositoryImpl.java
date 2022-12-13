@@ -1,16 +1,16 @@
 package tech.reliab.course.mikhaylyukovada.bank.repository.common;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.common.BankObject;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.BasicModel;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Реализация интерфейса с методами для взаимодейтсвия с банковскими объектами
+ * Реализация интерфейса с базовыми методами для взаимодействия с объектами
  *
- * @param <T> объекты банка
+ * @param <T> объекты
  */
-public abstract class BankObjectRepositoryImpl<T extends BankObject> implements BankObjectRepository<T>{
+public abstract class BasicModelRepositoryImpl<T extends BasicModel> implements BasicModelRepository<T> {
     private long currentId = 1L;
     private final Map<Long, T> repository = new LinkedHashMap<>();
 

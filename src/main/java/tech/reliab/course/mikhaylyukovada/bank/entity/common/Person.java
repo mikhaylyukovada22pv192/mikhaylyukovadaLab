@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * Модель человека
  */
-public class Person extends BankObject {
+public class Person extends BasicModel {
 
     protected String name;
     protected LocalDate birthDate;
