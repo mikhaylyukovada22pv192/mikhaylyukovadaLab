@@ -1,12 +1,12 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.models.BankObject;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.BasicModel;
 import java.time.LocalDate;
 
 /**
  * Модель кредитного счета
  */
-public class CreditAccount extends BankObject {
+public class CreditAccount extends BasicModel {
     private User user;
     private String bankName;
     private LocalDate startDate;
@@ -16,12 +16,11 @@ public class CreditAccount extends BankObject {
     private Double monthlyPayment;
     private Double interestRate;
     private Employee employee;
-    private String paymentAccount;
+    private PaymentAccount paymentAccount;
 
     /**
      * Консструктор для создания модели кредитного счета
      *
-     * @param id id счета
      * @param user пользователь кредитного счета
      * @param bankName название банка
      * @param startDate дата начала
@@ -31,8 +30,7 @@ public class CreditAccount extends BankObject {
      * @param employee сотрудник, выдавший кредит
      * @param paymentAccount платежный счет
      */
-    public CreditAccount(Long id, User user, String bankName, LocalDate startDate, Integer monthsNumber, Double creditAmount, Double interestRate, Employee employee, String paymentAccount) {
-        super(id);
+    public CreditAccount(User user, String bankName, LocalDate startDate, Integer monthsNumber, Double creditAmount, Double interestRate, Employee employee, PaymentAccount paymentAccount) {
         this.user = user;
         this.bankName = bankName;
         this.startDate = startDate;
@@ -109,7 +107,7 @@ public class CreditAccount extends BankObject {
     /**
      * @return платежный счет
      */
-    public String getPaymentAccount() {
+    public PaymentAccount getPaymentAccount() {
         return paymentAccount;
     }
 
@@ -199,7 +197,7 @@ public class CreditAccount extends BankObject {
      *
      * @param paymentAccount счет
      */
-    public void setPaymentAccount(String paymentAccount) {
+    public void setPaymentAccount(PaymentAccount paymentAccount) {
         this.paymentAccount = paymentAccount;
     }
 
@@ -233,7 +231,7 @@ public class CreditAccount extends BankObject {
                 ", monthlyPayment=" + monthlyPayment +
                 ", interestRate=" + interestRate +
                 ", employee=" + employee.getName() +
-                ", paymentAccount='" + paymentAccount + '\'' +
+                ", paymentAccount='" + paymentAccount.getBankName() + '\'' +
                 '}';
     }
 }

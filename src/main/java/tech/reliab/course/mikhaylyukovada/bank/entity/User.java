@@ -1,8 +1,9 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.models.Person;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.Person;
 import java.time.LocalDate;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Модель пользователя
@@ -10,7 +11,7 @@ import java.util.Random;
 public class User extends Person {
     private String workPlace;
     private Double monthlyIncome;
-    private Bank bank;
+    private List<Bank> banks = new ArrayList<>();
     private CreditAccount creditAccount = null;
     private PaymentAccount paymentAccount = null;
     private Double creditRating;
@@ -18,20 +19,17 @@ public class User extends Person {
     /**
      * Конструктор для создания модели пользователя
      *
-     * @param id id пользователя
      * @param name имя пользователя
      * @param birthDate дата рождения
      * @param workPlace место работы
      * @param bank банк, которым пользуется
      */
-    public User(Long id, String name, LocalDate birthDate, String workPlace, Bank bank) {
-        super(id, name, birthDate);
+    public User(String name, LocalDate birthDate, String workPlace, Bank bank, Double monthlyIncome, Double creditRating) {
+        super(name, birthDate);
         this.workPlace = workPlace;
-        this.bank = bank;
-
-        Random rand = new Random();
-        this.monthlyIncome = rand.nextDouble(10000) + 100;
-        this.creditRating = this.monthlyIncome % 100;
+        this.banks.add(bank);
+        this.monthlyIncome = monthlyIncome;
+        this.creditRating = creditRating;
     }
 
     /**
@@ -51,8 +49,8 @@ public class User extends Person {
     /**
      * @return банк, которым пользуется
      */
-    public Bank getBank() {
-        return bank;
+    public List<Bank> getBanks() {
+        return banks;
     }
 
     /**
@@ -90,8 +88,8 @@ public class User extends Person {
      *
      * @param bank банк
      */
-    public void setBank(Bank bank) {
-        this.bank = bank;
+    public void addBank(Bank bank) {
+        this.banks.add(bank);
     }
 
     /**
@@ -113,6 +111,15 @@ public class User extends Person {
     }
 
     /**
+     * Задает кредитный рейтинг
+     *
+     * @param creditRating кредитный рейтинг
+     */
+    public void setCreditRating(Double creditRating) {
+        this.creditRating = creditRating;
+    }
+
+    /**
      * Отчищает данные пользователя
      */
     public void clearUser() {
@@ -121,7 +128,7 @@ public class User extends Person {
         this.birthDate = null;
         this.workPlace = null;
         this.monthlyIncome = null;
-        this.bank = null;
+        this.banks = null;
         this.creditAccount = null;
         this.paymentAccount = null;
         this.creditRating = null;
@@ -135,9 +142,9 @@ public class User extends Person {
                 ", birthDate=" + birthDate +
                 ", workPlace='" + workPlace + '\'' +
                 ", monthlyIncome=" + monthlyIncome +
-                ", bank=" + bank.getName() +
-                ", creditAccount=" + creditAccount.toString() +
-                ", paymentAccount=" + paymentAccount.toString() +
+                ", bank=" + banks.stream().map(Bank::getName).toList() +
+                //", creditAccount=" + creditAccount.toString() +
+                //", paymentAccount=" + paymentAccount.toString() +
                 ", creditRating=" + creditRating +
                 '}';
     }

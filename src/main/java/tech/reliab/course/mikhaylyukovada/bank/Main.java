@@ -1,89 +1,100 @@
 package tech.reliab.course.mikhaylyukovada.bank;
 
+import tech.reliab.course.mikhaylyukovada.bank.entity.*;
 import tech.reliab.course.mikhaylyukovada.bank.service.*;
 import tech.reliab.course.mikhaylyukovada.bank.service.impl.*;
+import tech.reliab.course.mikhaylyukovada.bank.utils.BankEntityGenerator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Scanner;
 
-import java.time.LocalDate;
 
 public class Main {
+
+    static BankEntityGenerator generator = new BankEntityGenerator();
+
     public static void main(String[] args) {
-        BankService bank = new BankServiceImpl();
-        bank.create(
-                1L,
-                "Sberbank"
-        );
+        BankService bankService = BankServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
+        Scanner input = new Scanner(System.in);
 
-        BankOfficeService bankOffice = new BankOfficeServiceImpl(bank);
-        bankOffice.create(
-                2L,
-                "Sberbank office",
-                "Moscow, Lenin's street 12",
-                true,
-                true,
-                true,
-                true,
-                true,
-                120.
-        );
+        generateBank(5, 3, 5, 5, 2);
 
-        EmployeeService employee = new EmployeeServiceImpl(bankOffice);
-        employee.create(
-                3L,
-                "Alex Mironov",
-                LocalDate.of(1990, 8, 11),
-                "Director",
-                "Sberbank",
-                true,
-                bankOffice.read(),
-                true,
-                10000.
-        );
+        System.out.println("\nAll banks name:\n");
+        bankService.getAllObjects().forEach(bank -> System.out.println(bank.getName()));
 
-        AtmService bankAtm = new AtmServiceImpl(bankOffice);
-        bankAtm.create(
-                bankOffice.read(),
-                4L,
-                "Sberbank ATM",
-                true,
-                "Moscow, Lenin's street 12",
-                employee.read(),
-                true,
-                true,
-                250.
-        );
+        String bankName = null;
+        while(bankName == null || bankName.isEmpty()) {
+            System.out.println("\nInput bank name to get more info:");
+            bankName = input.nextLine();
+        }
 
-        UserService user = new UserServiceImpl(bank);
-        user.create(
-                5L,
-                "Max Afdeev",
-                LocalDate.of(1995, 1, 10),
-                "VK",
-                bank.read()
-        );
+        try {
+            String finalBankName = bankName;
+            var requiredBank = bankService.getAllObjects().stream().filter(bank ->
+                    Objects.equals(bank.getName(), finalBankName)
+            ).findFirst().get();
 
-        CreditAccountService creditAccount = new CreditAccountServiceImpl();
-        creditAccount.create(
-                6L,
-                user.read(),
-                "Sberbank",
-                LocalDate.of(2022, 2, 20),
-                24,
-                500000.,
-                bank.read().getInterestRate(),
-                employee.read(),
-                "123rt4856"
-        );
+            bankService.outputBankInfo(requiredBank.getId());
+            System.out.println();
+        } catch (NoSuchElementException e) {
+            System.out.println("No such bank. " + e.getMessage());
+        }
 
-        PaymentAccountService paymentAccount = new PaymentAccountServiceImpl();
-        paymentAccount.create(
-                7L,
-                user.read(),
-                "Sberbank"
-        );
+        System.out.println("\nAll clients name:\n");
+        userService.getAllObjects().forEach(user -> System.out.println(user.getName()));
 
-        user.read().setCreditAccount(creditAccount.read());
-        user.read().setPaymentAccount(paymentAccount.read());
+        String userName = null;
+        while(userName == null || userName.isEmpty()) {
+            System.out.println("\nInput user name to get more info:");
+            userName = input.nextLine();
+        }
 
-        System.out.println(bank.read() + "\n" + bankOffice.read() + "\n" + employee.read() + "\n" + bankAtm.read() + "\n" + user.read() + "\n" + creditAccount.read() + "\n" + paymentAccount.read());
+        try {
+            String finalUserName = userName;
+            var requiredUser = userService.getAllObjects().stream().filter(user ->
+                    Objects.equals(user.getName(), finalUserName)
+            ).findFirst().get();
+
+            userService.outputUserAccounts(requiredUser.getId());
+            System.out.println();
+        } catch (NoSuchElementException e) {
+            System.out.println("No such user. " + e.getMessage());
+        }
     }
+
+    private static void generateBank(int numberOfBanks, int numberOfOffices, int numberOfEmployes, int numberOfUsers, int numberOfAccounts) {
+        BankService bankService = BankServiceImpl.getInstance();
+        BankOfficeService bankOfficeService = BankOfficeServiceImpl.getInstance();
+        EmployeeService employeeService = EmployeeServiceImpl.getInstance();
+        AtmService bankAtmService = AtmServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
+        PaymentAccountService paymentAccountService = PaymentAccountServiceImpl.getInstance();
+        CreditAccountService creditAccountService = CreditAccountServiceImpl.getInstance();
+
+        for (int banksNumber = 0; banksNumber < numberOfBanks; banksNumber++) {
+            Bank bank = bankService.addObject(generator.createBank());
+            Employee employeeForAccount = null;
+
+            for (int officesNumber = 0; officesNumber < numberOfOffices; officesNumber++) {
+                BankOffice bankOffice = bankOfficeService.addObject(generator.createBankOffice(bank));
+
+                for (int employeeNumber = 0; employeeNumber < numberOfEmployes; employeeNumber++) {
+                    employeeForAccount = employeeService.addObject(generator.createEmployee(bankOffice));
+                    bankAtmService.addObject(generator.createBankAtm(bankOffice, employeeForAccount));
+                }
+
+            }
+
+            for (int usersNumber = 0; usersNumber < numberOfUsers; usersNumber++) {
+                var user = userService.addObject(generator.createUser(bank));
+
+                for (int accountsNumber = 0; accountsNumber < numberOfAccounts; accountsNumber++) {
+                    PaymentAccount paymentAccount = paymentAccountService.addObject(generator.createPaymentAccount(bank, user));
+                    creditAccountService.addObject(generator.createCreditAccount(bank, user, paymentAccount, employeeForAccount));
+                }
+            }
+        }
+    }
+
 }

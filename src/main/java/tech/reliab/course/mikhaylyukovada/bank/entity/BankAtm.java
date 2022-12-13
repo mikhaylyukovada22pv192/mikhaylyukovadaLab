@@ -1,11 +1,11 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.models.BankObject;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.BasicModel;
 
 /**
  * Модель банкомата
  */
-public class BankAtm extends BankObject {
+public class BankAtm extends BasicModel {
     private BankOffice office;
     private String name;
     private Boolean isWorking;
@@ -13,12 +13,12 @@ public class BankAtm extends BankObject {
     private Employee employee;
     private Boolean isGivingMoney;
     private Boolean isAcceptingMoney;
+    private Double totalMoney;
     private Double maintenanceCost;
 
     /**
      * Конструктор для создания модели АТМ
      *
-     * @param id id банкомата
      * @param office банковский офис
      * @param name название банкомата
      * @param isWorking работает ли банкомат
@@ -26,17 +26,18 @@ public class BankAtm extends BankObject {
      * @param employee обслуживающий сотрудник
      * @param isGivingMoney выдает ли деньги
      * @param isAcceptingMoney принимает ли деньги
+     * @param totalMoney общее кол-во денег
      * @param maintenanceCost стоимость обслуживания
      */
-    public BankAtm(Long id, BankOffice office, String name, Boolean isWorking, String location, Employee employee, Boolean isGivingMoney, Boolean isAcceptingMoney, Double maintenanceCost) {
-        super(id);
-        this.office = office;
+    public BankAtm(String name, BankOffice office, Boolean isWorking, String location, Employee employee, Boolean isGivingMoney, Boolean isAcceptingMoney, Double totalMoney, Double maintenanceCost) {
         this.name = name;
+        this.office = office;
         this.isWorking = isWorking;
         this.location = location;
         this.employee = employee;
         this.isGivingMoney = isGivingMoney;
         this.isAcceptingMoney = isAcceptingMoney;
+        this.totalMoney = totalMoney;
         this.maintenanceCost = maintenanceCost;
     }
 
@@ -87,6 +88,13 @@ public class BankAtm extends BankObject {
      */
     public Boolean getAcceptingMoney() {
         return isAcceptingMoney;
+    }
+
+    /**
+     * @return общее кол-во денег
+     */
+    public Double getTotalMoney() {
+        return totalMoney;
     }
 
     /**

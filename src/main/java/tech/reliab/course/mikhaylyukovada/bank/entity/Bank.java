@@ -1,12 +1,11 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.models.BankObject;
-import java.util.Random;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.BasicModel;
 
 /**
  * Модель банка
  */
-public class Bank extends BankObject {
+public class Bank extends BasicModel {
 
     private String name;
     private Integer officesNumber = 0;
@@ -20,17 +19,13 @@ public class Bank extends BankObject {
     /**
      * Конструктор для создания модели банка
      *
-     * @param id id банка
      * @param name название
      */
-    public Bank(Long id, String name) {
-        super(id);
+    public Bank(String name, Integer rating, Double money, Double interestRate) {
         this.name = name;
-
-        Random rand = new Random();
-        this.bankRating = rand.nextInt(100);
-        this.totalMoney = rand.nextDouble(1000000);
-        this.interestRate = rand.nextDouble(20 - this.bankRating / 10.);
+        this.bankRating = rating;
+        this.totalMoney = money;
+        this.interestRate = interestRate;
     }
 
     protected Bank(Bank bank) {
@@ -113,29 +108,29 @@ public class Bank extends BankObject {
     /**
      * Добавляет офис
      */
-    public void addOffice() {
-        this.officesNumber++;
+    public void setOfficesNumber(int number) {
+        this.officesNumber = number;
     }
 
     /**
      * Добавляет АТМ
      */
-    public void addAtm() {
-        this.atmsNumber++;
+    public void setAtmsNumber(int number) {
+        this.atmsNumber = number;
     }
 
     /**
      * Добавляет работника
      */
-    public void addEmployee() {
-        this.employeesNumber++;
+    public void setEmployeesNumber(int number) {
+        this.employeesNumber = number;
     }
 
     /**
      * Добавляет клиента
      */
-    public void addClient() {
-        this.clientsNumber++;
+    public void setClientsNumber(int number) {
+        this.clientsNumber = number;
     }
 
     /**

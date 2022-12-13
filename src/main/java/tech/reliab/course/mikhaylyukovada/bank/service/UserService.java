@@ -1,24 +1,17 @@
 package tech.reliab.course.mikhaylyukovada.bank.service;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.Bank;
 import tech.reliab.course.mikhaylyukovada.bank.entity.User;
-
-import java.time.LocalDate;
+import tech.reliab.course.mikhaylyukovada.bank.service.common.BasicModelService;
 
 /**
  * Интерфейс для взаимодействия с пользователями
  */
-public interface UserService extends Service<User> {
+public interface UserService extends BasicModelService<User> {
 
     /**
-     * Создает модель пользователя
+     * Вывод всей информации о счетах пользователя
      *
-     * @param id id пользователя
-     * @param name имя пользователя
-     * @param birthDate дата рождения
-     * @param workPlace место работы
-     * @param bank банк, которым пользуется
+     * @param userId id пользователя
      */
-    void create(Long id, String name, LocalDate birthDate, String workPlace, Bank bank);
-
+    void outputUserAccounts(Long userId);
 }

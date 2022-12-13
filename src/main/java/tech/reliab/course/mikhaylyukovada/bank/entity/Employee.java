@@ -1,6 +1,6 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.models.Person;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.Person;
 import java.time.LocalDate;
 
 /**
@@ -17,20 +17,17 @@ public class Employee extends Person {
     /**
      * Конструктор для создания модели сотрудника
      *
-     * @param id id сотрудника
      * @param name имя сотрудника
      * @param birthDate дата рождения
      * @param jobTitle должность
-     * @param bankName название банка
      * @param isWorkingInOffice работает ли в офисе
      * @param bankOffice офис, в котором работает
      * @param isPossibleGetLoan может ли выдать кредит
      * @param salary зарплата
      */
-    public Employee(Long id, String name, LocalDate birthDate, String jobTitle, String bankName, Boolean isWorkingInOffice, BankOffice bankOffice, Boolean isPossibleGetLoan, Double salary) {
-        super(id, name, birthDate);
+    public Employee(String name, LocalDate birthDate, String jobTitle, Boolean isWorkingInOffice, BankOffice bankOffice, Boolean isPossibleGetLoan, Double salary) {
+        super(name, birthDate);
         this.jobTitle = jobTitle;
-        this.bankName = bankName;
         this.isWorkingInOffice = isWorkingInOffice;
         this.bankOffice = bankOffice;
         this.isPossibleGetLoan = isPossibleGetLoan;

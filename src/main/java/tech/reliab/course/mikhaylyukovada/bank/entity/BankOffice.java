@@ -1,13 +1,14 @@
 package tech.reliab.course.mikhaylyukovada.bank.entity;
 
-import tech.reliab.course.mikhaylyukovada.bank.entity.models.BankObject;
+import tech.reliab.course.mikhaylyukovada.bank.entity.common.BasicModel;
 
 /**
  * Модель банковского офиса
  */
-public class BankOffice extends BankObject {
+public class BankOffice extends BasicModel {
     private String name;
     private String address;
+    private Bank bank;
     private Boolean isWorking;
     private Boolean isPossibleToPlaceATM;
     private Integer atmsNumber = 0;
@@ -20,25 +21,27 @@ public class BankOffice extends BankObject {
     /**
      * Конструктор для создания модели банковского офиса
      *
-     * @param id id офиса
      * @param name название офиса
      * @param address адрес
+     * @param bank банк
      * @param isWorking работает ли офис
      * @param isPossibleToPlaceATM возможно ли разместить АТМ
      * @param isGettingLoan возможно ли оформить кредит
      * @param isGettingMoney возможно ли снять деньги
      * @param isGivingMoney возможно ли положить деньги
+     * @param totalMoney общее кол-во денег
      * @param rentPrice стоимость аренды
      */
-    public BankOffice(Long id, String name, String address, Boolean isWorking, Boolean isPossibleToPlaceATM, Boolean isGettingLoan, Boolean isGettingMoney, Boolean isGivingMoney, Double rentPrice) {
-        super(id);
+    public BankOffice(String name, String address, Bank bank, Boolean isWorking, Boolean isPossibleToPlaceATM, Boolean isGettingLoan, Boolean isGettingMoney, Boolean isGivingMoney, Double totalMoney, Double rentPrice) {
         this.name = name;
         this.address = address;
+        this.bank = bank;
         this.isWorking = isWorking;
         this.isPossibleToPlaceATM = isPossibleToPlaceATM;
         this.isGettingLoan = isGettingLoan;
         this.isGettingMoney = isGettingMoney;
         this.isGivingMoney = isGivingMoney;
+        this.totalMoney = totalMoney;
         this.rentPrice = rentPrice;
     }
 
@@ -55,6 +58,11 @@ public class BankOffice extends BankObject {
     public String getAddress() {
         return address;
     }
+
+    /**
+     * @return банк, к которому относится офис
+     */
+    public Bank getBank() { return this.bank; }
 
     /**
      * @return работает ли офис

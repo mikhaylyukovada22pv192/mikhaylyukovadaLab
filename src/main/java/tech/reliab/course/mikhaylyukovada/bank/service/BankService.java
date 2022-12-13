@@ -1,38 +1,17 @@
 package tech.reliab.course.mikhaylyukovada.bank.service;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.Bank;
+import tech.reliab.course.mikhaylyukovada.bank.service.common.BasicModelService;
 
 /**
  * Интерфейс для взаимодействия с банками
  */
-public interface BankService extends Service<Bank> {
+public interface BankService extends BasicModelService<Bank> {
 
     /**
-     * Созадет модель банка
+     * Вывод всей информации о банке
      *
-     * @param id id банка
-     * @param name название
+     * @param bankId id банка
      */
-    void create(Long id, String name);
-
-    /**
-     * Добавляет офис
-     */
-    void addOffice();
-
-    /**
-     * Добавляет АТМ
-     */
-    void addAtm();
-
-    /**
-     * Добавляет работника
-     */
-    void addEmployee();
-
-    /**
-     * Добавляет клиента
-     */
-    void addClient();
-
+    void outputBankInfo(Long bankId);
 }
