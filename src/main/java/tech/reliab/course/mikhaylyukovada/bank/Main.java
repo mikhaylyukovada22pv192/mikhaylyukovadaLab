@@ -51,9 +51,9 @@ public class Main {
         }
 
         try {
-            String finalUserName = bankName;
-            var requiredUser = userService.getAllObjects().stream().filter(bank ->
-                    Objects.equals(bank.getName(), finalUserName)
+            String finalUserName = userName;
+            var requiredUser = userService.getAllObjects().stream().filter(user ->
+                    Objects.equals(user.getName(), finalUserName)
             ).findFirst().get();
 
             userService.outputUserAccounts(requiredUser.getId());
