@@ -4,8 +4,12 @@ import tech.reliab.course.mikhaylyukovada.bank.entity.*;
 import tech.reliab.course.mikhaylyukovada.bank.exceptions.FailedLoanException;
 import tech.reliab.course.mikhaylyukovada.bank.service.*;
 import tech.reliab.course.mikhaylyukovada.bank.service.impl.*;
-import tech.reliab.course.mikhaylyukovada.bank.utils.CreatingUtils;
+import tech.reliab.course.mikhaylyukovada.bank.utils.BankEntityGenerator;
+
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
@@ -16,14 +20,7 @@ public class Main {
 
     public static void main(String[] args) {
         generateBank(5, 3, 5, 5, 2);
-        getLoanForUser();
-
-        var userId = userService.getAllObjects().get(0).getId();
-
-        bankService.exportAccounts(bankService.getAllObjects().get(0).getId(), "/Users/darmi/LR4/accounts.txt");
-        bankService.transferAccounts(bankService.getAllObjects().get(0).getId(), bankService.getAllObjects().get(1).getId());
-
-        userService.outputUserAccounts(userId);
+        workWithTxtFile();
     }
 
     private static void generateBank(int numberOfBanks, int numberOfOffices, int numberOfEmployes, int numberOfUsers, int numberOfAccounts) {
@@ -141,4 +138,16 @@ public class Main {
         }
     }
 
+    // Функция для ЛР 4
+    private static void workWithTxtFile() {
+        BankService bankService = BankServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
+
+        var userId = userService.getAllObjects().get(0).getId();
+
+        bankService.exportAccounts(bankService.getAllObjects().get(0).getId(), "/Users/darmi/LR4/accounts.txt");
+        bankService.transferAccounts(bankService.getAllObjects().get(0).getId(), bankService.getAllObjects().get(1).getId());
+
+        userService.outputUserAccounts(userId);
+    }
 }
