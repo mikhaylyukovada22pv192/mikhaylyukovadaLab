@@ -123,8 +123,8 @@ public class Main {
 
         try {
             String finalUserName = userName;
-            var requiredUser = userService.getAllObjects().stream().filter(bank ->
-                    Objects.equals(bank.getName(), finalUserName)
+            var requiredUser = userService.getAllObjects().stream().filter(user ->
+                    Objects.equals(user.getName(), finalUserName)
             ).findFirst().get();
 
             try {
