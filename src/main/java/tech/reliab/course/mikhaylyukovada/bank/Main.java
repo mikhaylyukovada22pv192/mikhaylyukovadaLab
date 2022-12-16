@@ -145,7 +145,7 @@ public class Main {
 
         var userId = userService.getAllObjects().get(0).getId();
 
-        bankService.exportAccounts(bankService.getAllObjects().get(0).getId(), "/Users/darmi/LR4/accounts.txt");
+        bankService.exportUserAccounts(bankService.getAllObjects().get(0).getId(), userId, "/tmp/accounts.txt");
         bankService.transferAccounts(bankService.getAllObjects().get(0).getId(), bankService.getAllObjects().get(1).getId());
 
         userService.outputUserAccounts(userId);

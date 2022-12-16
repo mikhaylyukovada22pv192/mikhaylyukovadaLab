@@ -33,6 +33,15 @@ public interface BankService extends BasicModelService<Bank> {
     void exportAccounts(Long bankId, String filename);
 
     /**
+     * Выводит счета пользователя банка в txt файл
+     *
+     * @param bankId id банка
+     * @param userId id пользователя
+     * @param filename имя файла
+     */
+    void exportUserAccounts(Long bankId, Long userId, String filename);
+
+    /**
      * Считывает счета из txt файла в банк
      *
      * @param bankId id банка

@@ -38,7 +38,7 @@ public class BankServiceImpl implements BankService {
 
     private final BankRepository bankRepository = BankRepository.getInstance();
 
-    private static final String TRANSFER_PATH = "/Users/darmi/LR4/accounts.txt";
+    private static final String TRANSFER_PATH = "/tmp/accounts.txt";
     private static final int MIN_CLIENT_RATING = 5000;
     private static final int TOP_BANK_RATING = 50;
 
@@ -203,6 +203,27 @@ public class BankServiceImpl implements BankService {
         Bank bank = bankRepository.findById(bankId);
         var paymentAccounts = PaymentAccountServiceImpl.getInstance().getAllPaymentAccounts(bank);
         var creditAccounts = CreditAccountServiceImpl.getInstance().getAllCreditAccounts(bank);
+
+        AccountsRepository accountsRepository = new AccountsRepository(paymentAccounts, creditAccounts);
+
+        try {
+            File file = new File(filename);
+            objectMapper.writeValue(file, accountsRepository);
+        } catch (IOException e) {
+            System.out.println("Something went wrong in IO stream.\n" + e.getMessage());
+        }
+    }
+
+    @Override
+    public void exportUserAccounts(Long bankId, Long userId, String filename) {
+        UserService userService = UserServiceImpl.getInstance();
+        Bank bank = bankRepository.findById(bankId);
+        User user = userService.getObjectById(userId);
+
+        var paymentAccounts = PaymentAccountServiceImpl.getInstance().getAllPaymentAccounts(bank).
+                stream().filter(paymentAccount -> paymentAccount.getUser() == user).toList();
+        var creditAccounts = CreditAccountServiceImpl.getInstance().getAllCreditAccounts(bank).
+                stream().filter(paymentAccount -> paymentAccount.getUser() == user).toList();
 
         AccountsRepository accountsRepository = new AccountsRepository(paymentAccounts, creditAccounts);
 
