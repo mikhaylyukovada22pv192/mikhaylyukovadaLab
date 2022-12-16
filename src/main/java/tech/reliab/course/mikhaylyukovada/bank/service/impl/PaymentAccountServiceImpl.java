@@ -71,12 +71,16 @@ public class PaymentAccountServiceImpl implements PaymentAccountService {
     @Override
     public PaymentAccount getPaymentAccount(Bank bank, User user) {
         if(!user.getBanks().contains(bank)){
-            return this.addObject(this.createPaymentAccount(bank, user));
-
+            return null;
         }else {
             return this.getAllPaymentAccount(bank.getName(), user.getId())
                     .stream()
                     .findFirst().get();
         }
+    }
+
+    @Override
+    public PaymentAccount getNewPaymentAccount(Bank bank, User user) {
+        return this.addObject(this.createPaymentAccount(bank, user));
     }
 }

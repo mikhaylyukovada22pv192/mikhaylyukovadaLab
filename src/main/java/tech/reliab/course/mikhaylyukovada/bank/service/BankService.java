@@ -23,4 +23,13 @@ public interface BankService extends BasicModelService<Bank> {
      * @param creditSum сумма кредита
      */
     Long getLoan(Long userId, Double creditSum) throws FailedLoanException;
+
+    /**
+     * Выдает кредит в выбранном банке и возвраащет его id
+     *
+     * @param userId id пользователя
+     * @param bankId id банка
+     * @param creditSum сумма кредита
+     */
+    Long getLoanInCurrentBank(Long userId, Long bankId, Double creditSum) throws FailedLoanException;
 }
