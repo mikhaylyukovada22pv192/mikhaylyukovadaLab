@@ -2,6 +2,8 @@ package tech.reliab.course.mikhaylyukovada.bank.service.impl;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.BankOffice;
 import tech.reliab.course.mikhaylyukovada.bank.entity.Employee;
+import tech.reliab.course.mikhaylyukovada.bank.exceptions.IdNotFoundException;
+import tech.reliab.course.mikhaylyukovada.bank.exceptions.WrongNameException;
 import tech.reliab.course.mikhaylyukovada.bank.repository.EmployeeRepository;
 import tech.reliab.course.mikhaylyukovada.bank.service.BankOfficeService;
 import tech.reliab.course.mikhaylyukovada.bank.service.EmployeeService;
@@ -24,11 +26,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee addObject(Employee employee) {
+        if (employee.getName().isBlank()) {
+            throw new WrongNameException();
+        }
+
         Employee newEmployee = employeeRepository.add(employee);
         BankOffice office = newEmployee.getBankOffice();
 
         if (office != null) {
             bankOfficeService.addEmployee(office.getId());
+        } else {
+            throw new IdNotFoundException();
         }
 
         return newEmployee;
@@ -44,6 +52,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public boolean deleteObjectById(Long id) {
         Long officeId = employeeRepository.findById(id).getBankOffice().getId();
 
+        if (officeId == null) {
+            throw new IdNotFoundException();
+        }
+
         if (bankOfficeService.deleteEmployee(officeId)) {
             return employeeRepository.deleteById(id);
         }
@@ -52,6 +64,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getObjectById(Long id) {
+        if (id == null) {
+            throw new IdNotFoundException();
+        }
+
         return employeeRepository.findById(id);
     }
 
@@ -60,4 +76,19 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll();
     }
 
+    @Override
+    public Employee getEmployeeWithLoan(Long officeId) {
+        var firstEmployee = employeeRepository.findAll()
+                .stream()
+                .filter(employee -> employee.getBankOffice().getId().compareTo(officeId) == 0)
+                .filter(Employee::getPossibleGetLoan)
+                .findFirst();
+
+        if(firstEmployee.isEmpty()){
+            return null;
+        }
+
+        return firstEmployee.get();
+
+    }
 }

@@ -2,9 +2,12 @@ package tech.reliab.course.mikhaylyukovada.bank.service.impl;
 
 import tech.reliab.course.mikhaylyukovada.bank.entity.Bank;
 import tech.reliab.course.mikhaylyukovada.bank.entity.BankOffice;
+import tech.reliab.course.mikhaylyukovada.bank.exceptions.IdNotFoundException;
+import tech.reliab.course.mikhaylyukovada.bank.exceptions.WrongNameException;
 import tech.reliab.course.mikhaylyukovada.bank.repository.BankOfficeRepository;
 import tech.reliab.course.mikhaylyukovada.bank.service.BankOfficeService;
 import tech.reliab.course.mikhaylyukovada.bank.service.BankService;
+
 import java.util.List;
 
 /**
@@ -14,7 +17,9 @@ public class BankOfficeServiceImpl implements BankOfficeService {
     private static BankOfficeServiceImpl INSTANCE;
 
     public static BankOfficeServiceImpl getInstance() {
-        if (INSTANCE == null) { INSTANCE = new BankOfficeServiceImpl(); }
+        if (INSTANCE == null) {
+            INSTANCE = new BankOfficeServiceImpl();
+        }
 
         return INSTANCE;
     }
@@ -24,6 +29,10 @@ public class BankOfficeServiceImpl implements BankOfficeService {
 
     @Override
     public BankOffice addObject(BankOffice bankOffice) {
+        if (bankOffice.getName().isBlank()) {
+            throw new WrongNameException();
+        }
+
         BankOffice newBankOffice = bankOfficeRepository.add(bankOffice);
         Bank bank = bankService.getObjectById(bankOffice.getBank().getId());
 
@@ -44,6 +53,10 @@ public class BankOfficeServiceImpl implements BankOfficeService {
     public boolean deleteObjectById(Long id) {
         Long bankId = bankOfficeRepository.findById(id).getId();
 
+        if (bankId == null) {
+            throw new IdNotFoundException();
+        }
+
         if (bankOfficeRepository.deleteById(id)) {
             Bank bank = bankService.getObjectById(bankId);
 
@@ -60,8 +73,13 @@ public class BankOfficeServiceImpl implements BankOfficeService {
 
     @Override
     public BankOffice getObjectById(Long id) {
+        if (id == null) {
+            throw new IdNotFoundException();
+        }
+
         return bankOfficeRepository.findById(id);
     }
+
     @Override
     public List<BankOffice> getAllObjects() {
         return bankOfficeRepository.findAll();
@@ -81,6 +99,8 @@ public class BankOfficeServiceImpl implements BankOfficeService {
 
                 return true;
             }
+        } else {
+            throw new IdNotFoundException();
         }
 
         return false;
@@ -100,6 +120,8 @@ public class BankOfficeServiceImpl implements BankOfficeService {
 
                 return true;
             }
+        } else {
+            throw new IdNotFoundException();
         }
 
         return false;
@@ -109,6 +131,7 @@ public class BankOfficeServiceImpl implements BankOfficeService {
     @Override
     public boolean addEmployee(Long bankOfficeId) {
         BankOffice bankOffice = bankOfficeRepository.findById(bankOfficeId);
+
         if (bankOffice != null) {
             Bank bank = bankService.getObjectById(bankOffice.getBank().getId());
 
@@ -118,6 +141,8 @@ public class BankOfficeServiceImpl implements BankOfficeService {
 
                 return true;
             }
+        } else {
+            throw new IdNotFoundException();
         }
 
         return false;
@@ -136,8 +161,17 @@ public class BankOfficeServiceImpl implements BankOfficeService {
 
                 return true;
             }
+        } else {
+            throw new IdNotFoundException();
         }
 
         return false;
+    }
+
+    @Override
+    public List<BankOffice> getAllBankOfficesByBankId(Long bankId) {
+        return bankOfficeRepository.findAll().stream()
+                .filter(bankOffice -> bankOffice.getBank().getId().compareTo(bankId) == 0)
+                .toList();
     }
 }
