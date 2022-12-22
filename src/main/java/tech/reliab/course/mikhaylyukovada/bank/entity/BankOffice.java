@@ -18,6 +18,7 @@ public class BankOffice extends BasicModel {
     private Double totalMoney;
     private Double rentPrice;
 
+    public BankOffice() {}
     /**
      * Конструктор для создания модели банковского офиса
      *

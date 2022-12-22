@@ -71,7 +71,8 @@ public class PaymentAccountServiceImpl implements PaymentAccountService {
     @Override
     public PaymentAccount getPaymentAccount(Bank bank, User user) {
         if(!user.getBanks().contains(bank)){
-            return null;
+            return this.addObject(this.createPaymentAccount(bank, user));
+
         }else {
             return this.getAllPaymentAccount(bank.getName(), user.getId())
                     .stream()
@@ -80,7 +81,10 @@ public class PaymentAccountServiceImpl implements PaymentAccountService {
     }
 
     @Override
-    public PaymentAccount getNewPaymentAccount(Bank bank, User user) {
-        return this.addObject(this.createPaymentAccount(bank, user));
+    public List<PaymentAccount> getAllPaymentAccounts(Bank bank) {
+        return paymentAccountRepository.findAll()
+                .stream()
+                .filter(account -> account.getBankName().equals(bank.getName()))
+                .toList();
     }
 }

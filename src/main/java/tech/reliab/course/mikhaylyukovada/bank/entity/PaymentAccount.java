@@ -10,6 +10,8 @@ public class PaymentAccount extends BasicModel {
     private String bankName;
     private Double moneyAmount = 0.;
 
+    public PaymentAccount() {}
+
     /**
      * Коснтруктор для создания модель платежного счета
      *

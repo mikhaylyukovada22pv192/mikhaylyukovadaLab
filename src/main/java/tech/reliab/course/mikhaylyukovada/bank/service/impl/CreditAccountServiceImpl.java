@@ -71,4 +71,12 @@ public class CreditAccountServiceImpl implements CreditAccountService {
     public List<CreditAccount> getAllObjects() {
         return creditAccountRepository.findAll();
     }
+
+    @Override
+    public List<CreditAccount> getAllCreditAccounts(Bank bank) {
+        return creditAccountRepository.findAll()
+                .stream()
+                .filter(account -> account.getBankName().equals(bank.getName()))
+                .toList();
+    }
 }

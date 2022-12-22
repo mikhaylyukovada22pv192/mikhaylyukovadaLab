@@ -16,6 +16,8 @@ public class Bank extends BasicModel {
     private Double totalMoney;
     private Double interestRate;
 
+    public Bank() {}
+
     /**
      * Конструктор для создания модели банка
      *

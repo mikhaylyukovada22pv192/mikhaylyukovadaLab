@@ -10,6 +10,8 @@ public class Person extends BasicModel {
     protected String name;
     protected LocalDate birthDate;
 
+    public Person() {}
+
     /**
      * Конструктор для создания модели человека
      *

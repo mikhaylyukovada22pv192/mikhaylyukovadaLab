@@ -5,11 +5,11 @@ import tech.reliab.course.mikhaylyukovada.bank.exceptions.FailedLoanException;
 import tech.reliab.course.mikhaylyukovada.bank.service.*;
 import tech.reliab.course.mikhaylyukovada.bank.service.impl.*;
 import tech.reliab.course.mikhaylyukovada.bank.utils.BankEntityGenerator;
+
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
-
 
 public class Main {
 
@@ -20,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) {
         generateBank(5, 3, 5, 5, 2);
-        getLoanForUser();
+        workWithTxtFile();
     }
 
     private static void generateBank(int numberOfBanks, int numberOfOffices, int numberOfEmployes, int numberOfUsers, int numberOfAccounts) {
@@ -112,68 +112,42 @@ public class Main {
         UserService userService = UserServiceImpl.getInstance();
         Scanner input = new Scanner(System.in);
 
-        System.out.println("\nAll clients:\n");
-        userService.getAllObjects().forEach(user -> System.out.println(user.toString()));
+        System.out.println("\nAll clients name:\n");
+        userService.getAllObjects().forEach(user -> System.out.println(user.getName()));
 
         String userName = null;
         while (userName == null || userName.isEmpty()) {
-            System.out.println("\nInput user name:");
+            System.out.println("\nInput user name to get a loan for him:");
             userName = input.nextLine();
         }
 
-        System.out.println("\nAll banks:\n");
-        bankService.getAllObjects().forEach(bank -> System.out.println(bank.toString()));
-
-        String bankName = null;
-        while (bankName == null || bankName.isEmpty()) {
-            System.out.println("\nInput bank name:");
-            bankName = input.nextLine();
-        }
-
-        String creditSum = null;
-        while (creditSum == null || creditSum.isEmpty()) {
-            System.out.println("\nInput credit sum:");
-            creditSum = input.nextLine();
-        }
-
-        User requiredUser = null;
-        Bank requiredBank = null;
-
         try {
             String finalUserName = userName;
-            requiredUser = userService.getAllObjects().stream().filter(user ->
+            var requiredUser = userService.getAllObjects().stream().filter(user ->
                     Objects.equals(user.getName(), finalUserName)
             ).findFirst().get();
+
+            try {
+                var creditId = bankService.getLoan(requiredUser.getId(), RANDOM.nextDouble() * CREDIT_SUM + MIN_CREDIT_SUM);
+                System.out.println("Successfully get a loan with id = " + creditId);
+            } catch (FailedLoanException failedLoanException) {
+                System.out.println("Failed to get a loan");
+            }
         } catch (NoSuchElementException e) {
             System.out.println("No such user. " + e.getMessage());
         }
+    }
 
-        try {
-            String finalBankName = bankName;
-            requiredBank = bankService.getAllObjects().stream().filter(bank ->
-                    Objects.equals(bank.getName(), finalBankName)
-            ).findFirst().get();
-        } catch (NoSuchElementException e) {
-            System.out.println("No such bank. " + e.getMessage());
-        }
+    // Функция для ЛР 4
+    private static void workWithTxtFile() {
+        BankService bankService = BankServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
 
-        if(requiredUser != null &&  requiredBank != null) {
-            try {
-                double finalCreditSum = Double.parseDouble(creditSum);
+        var userId = userService.getAllObjects().get(0).getId();
 
-                if (finalCreditSum > MIN_CREDIT_SUM) {
-                    try {
-                        var creditId = bankService.getLoanInCurrentBank(requiredUser.getId(), requiredBank.getId(), finalCreditSum);
-                        System.out.println("Successfully get a loan with id = " + creditId);
-                    } catch (FailedLoanException failedLoanException) {
-                        System.out.println("Failed to get a loan. " + failedLoanException.getMessage());
-                    }
-                } else {
-                    System.out.println("Error. Min credit sum = 10 000");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Wrong credit sum. " + e.getMessage());
-            }
-        }
+        bankService.exportUserAccounts(bankService.getAllObjects().get(0).getId(), userId, "/tmp/accounts.txt");
+        bankService.transferAccounts(bankService.getAllObjects().get(0).getId(), bankService.getAllObjects().get(1).getId());
+
+        userService.outputUserAccounts(userId);
     }
 }

@@ -20,7 +20,7 @@ public interface PaymentAccountService extends BasicModelService<PaymentAccount>
     List<PaymentAccount> getAllPaymentAccount(String bankName, Long userId);
 
     /**
-     * Возвращает счет пользователя в выбранном банке или null, если его не было
+     * Возвращает счет пользователя в выбранном банке. Созадет счет, если его не было
      *
      * @param bank банк
      * @param user пользователь
@@ -28,10 +28,9 @@ public interface PaymentAccountService extends BasicModelService<PaymentAccount>
     PaymentAccount getPaymentAccount(Bank bank, User user);
 
     /**
-     * Созадет счет пользователя в выбранном банке
+     * Возвращает все счета, хранящиеся в банке
      *
      * @param bank банк
-     * @param user пользователь
      */
-    PaymentAccount getNewPaymentAccount(Bank bank, User user);
+    List<PaymentAccount> getAllPaymentAccounts(Bank bank);
 }

@@ -25,11 +25,35 @@ public interface BankService extends BasicModelService<Bank> {
     Long getLoan(Long userId, Double creditSum) throws FailedLoanException;
 
     /**
-     * Выдает кредит в выбранном банке и возвраащет его id
+     * Выводит счета банка в txt файл
      *
-     * @param userId id пользователя
      * @param bankId id банка
-     * @param creditSum сумма кредита
+     * @param filename имя файла
      */
-    Long getLoanInCurrentBank(Long userId, Long bankId, Double creditSum) throws FailedLoanException;
+    void exportAccounts(Long bankId, String filename);
+
+    /**
+     * Выводит счета пользователя банка в txt файл
+     *
+     * @param bankId id банка
+     * @param userId id пользователя
+     * @param filename имя файла
+     */
+    void exportUserAccounts(Long bankId, Long userId, String filename);
+
+    /**
+     * Считывает счета из txt файла в банк
+     *
+     * @param bankId id банка
+     * @param filename имя файла
+     */
+    void importAccounts(Long bankId, String filename);
+
+    /**
+     * Переносит счета из одно банка в другой
+     *
+     * @param srcBankId id банка, из которого будут перенесены счета
+     * @param dstBankId id банка, в который будут перенесены счета
+     */
+    void transferAccounts(Long srcBankId, Long dstBankId);
 }
